@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>index_phone.css"/>
+	<div>
+		<div class="h">文章列表<span><a href="<?php echo URLROOT;?>essay_list">更多</a></span></div>
+	<?php if($essay_list) foreach($essay_list as $v){ ?>
+		<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
+		<div class="essay_li">
+			<h1 class="title"><?php echo $v['title'];?></h1>
+			<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
+			<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
+		</div>
+		</a>
+	<?php }else{ ?>
+		暂无文章
+	<?php } ?>
+	</div>
+	<script>
+		var list=$('.content');
+			for(var i=0;i<list.length;i++){
+				list[i].innerHTML=myScript.sh_html(list[i].innerHTML,'<?php echo essay_server::sh;?>');
+			}
+		</script>

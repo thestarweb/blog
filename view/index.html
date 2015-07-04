@@ -1,0 +1,42 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>index.css"/>
+<div class="left">
+	<div class="left_div">
+		<div class="h">文章列表<span><a href="<?php echo URLROOT;?>essay/list/1">更多</a></span></div>
+	<?php if($essay_list) foreach($essay_list as $v){ ?>
+		<div class="essay_li">
+		<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
+			<h1 class="title"><?php echo $v['title'];?></h1>
+			<div><?php $types=$type->get_types_by_eid($v['id']);foreach($types as $t){?>
+			<a href="<?php echo URLROOT,'type/id/',$t['id'];?>/1" class="type"><?php echo $t['name'];?></a>
+			<?php }?>
+			</div>
+			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
+			<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
+			<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
+		</a>
+		</div>
+	<?php }else{ ?>
+		暂无文章
+	<?php } ?>
+	</div>
+</div>
+<div class="right_div">
+	<div class="h">分类列表</div>
+	<div><ul>
+<?php foreach($type_list as $v){?>
+	<li><a href="<?php echo URLROOT,'type/id/',$v['id'];?>/1"><?php echo $v['name'];?></a></li>
+<?php }?>
+	</ul></div>
+</div>
+<?php require $system->get_view('others');?>
+<script>
+	var list=$('.content');
+	for(var i=0;i<list.length;i++){
+		//list[i].innerHTML=myScript.sh_html(list[i].innerHTML,'<?php echo essay_server::sh;?>');
+		myScript.marked(list[i].innerHTML,(function(dom){
+			return function(html){
+				dom.innerHTML=html;
+			}
+		})(list[i]));
+	}
+</script>

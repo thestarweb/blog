@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		#type{
+			overflow: hidden;
+		}
+		#type div{
+			float:left;
+		}
+	</style>
+</head>
+<body>
+<script src="<?php echo $system->ini_get('my_script_path');?>"></script>
+<table>
+<tr>
+<th>标题</th>
+<th>时间</th>
+<th>作者</th>
+<th>显示方式</th>
+<th>编辑</th>
+<th>删除</th>
+</tr>
+<?php foreach($list as $v){ ?>
+<tr sid="<?php echo $v['id']; ?>">
+<td><?php echo $v['title']; ?></td>
+<td><?php echo date('Y-m-d H:i:s',$v['time']);?></td>
+<td><?php echo $v['sender']; ?></td>
+<td><?php echo essay_server::display($v['display']) ?></td>
+<td><a class="e">编辑</a></td>
+<td><a class="d">删除</a></td>
+</tr>
+<?php } ?>
+</table>
+<?php echo $ye;?>
+<script>
+$('.e').set('onclick',function(){
+	//编辑
+	//this.parentNode.parentNode.id
+	myScript.show('标题<input id="title" type="text" value="'+1+'" /><select id="es"></select><div id="content"></div><div id="type"><div><select id="unselect_type" size="9"><?php foreach ($all_types as $value) {?><option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option><?php } ?></select></div><div><input type="button" value=">>" id="add_type"/><br/><input type="button" value="<<" id="remove_type"/></div><div><select id="select_type" size="9"></select></div></div><input id="ok" type="button" value="提交" />',610,350,'修改文章');
+	var content=new myScript.input('content',590,240,'<?php echo essay_server::sh;?>');
+	var p=this.parentNode.parentNode;
+	sid=p.getAttribute('sid');
+	
+	var ajax=$.ajax();
+	ajax.page=window.location.href;
+	ajax.data='getid='+sid;
+	ajax.callback=function(ajax){
+		if(ajax.json){
+			content.set(ajax.json.content);
+			$('#title').value=ajax.json.title;
+			var types=ajax.json.types;
+			var all_types=$('#unselect_type');
+			for (var j in types) {
+				for (var i = all_types.length - 1; i >= 0; i--) {
+					if(all_types[i].value==types[j].id){
+						add_type(i);
+						break;
+					}
+				};
+			};
+		}
+	}
+	ajax.send();
+
+	var tadd=[],tremove=[];
+	var add_type=function(i){
+		var dom=$('#unselect_type')[i];
+		$.remove(dom);
+		$('#select_type').appendChild(dom);
+	}
+	var remove_type=function(i){
+		var dom=$('#select_type')[i];
+		$.remove(dom);
+		$('#unselect_type').appendChild(dom);
+	}
+	var unset=function(arr,nu){
+		for(var i in arr){
+			if(arr[i]==nu){
+				//delete(arr[i]);
+				arr.splice(i,1);
+				return true;
+			}
+		}
+		return false;
+	}
+	$('#add_type').onclick=function(){
+		var s=$("#unselect_type")
+		var index=s.selectedIndex;
+		if(!unset(tremove,s[index].value)){
+			tadd.push(s[index].value)
+		}
+		add_type(index);
+	}
+	$('#remove_type').onclick=function(){
+		var s=$("#select_type")
+		var index=s.selectedIndex;
+		if(!unset(tadd,s[index].value)){
+			tremove.push(s[index].value)
+		}
+		remove_type(index);
+	}
+	//
+
+	$('#ok').onclick=function(){
+		var ajax=$.ajax();
+		ajax.page=window.location.href;
+		ajax.setCont({
+			upid:sid,
+			title:$('#title').value,
+			'content':content.get(),
+			add_type:tadd.toString(),
+			remove_type:tremove.toString()
+		});
+		ajax.callback=function(ajax){
+			alert(ajax.text);
+		}
+		ajax.send();
+	}
+});
+$('.d').set('onclick',function(){
+	alert('暂时不支持删除');
+});
+</script>
+</body></html>

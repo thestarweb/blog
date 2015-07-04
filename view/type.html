@@ -1,0 +1,49 @@
+<style>
+	#list{
+		padding: 5px;
+		line-height: 25px;
+	}
+	#list div{
+		border-bottom: solid 1.5px #000;
+	}
+	#list li{
+		overflow: hidden;
+		border-bottom: solid 1px #555; 
+	}
+	#list span{
+		float: right;
+		width: 90px;
+	}
+</style>
+<div class="left">
+<?php if($type_info['info']) {?>
+	<div class="left_div">
+		<div class="h">分类 <?php echo $type_info['name'];?> 的说明</div>
+		<div>
+			<?php echo $type_info['info'];?>
+		</div>
+	</div>
+<?php }?>
+<?php if($type_info['info']) {?>
+	<div class="left_div">
+		<div class="h">子分类</div>
+		<div>
+		。。
+			<!--?php echo $type_info['info'];?-->
+		</div>
+	</div>
+<?php }?>
+	<div class="left_div">
+		<div class="h"><?php echo $type_info['name'];?> 分类下的文章</div>
+		<?php require $system->get_view('public/list');?>
+	</div>
+	<div class="left_div">
+		<div class="h">翻页</div>
+		<div class="fanye">
+			<?php echo $ye;?>
+		</div>
+	</div>
+</div>
+<div class="right">
+<?php require $system->get_view('others');?>
+</div>

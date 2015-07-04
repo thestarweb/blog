@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title><?php echo $title;?> 手机版</title>
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->ini_get('styles_url');?>all_phone.css"/>
+	<script src="/myScript2.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
+<body>
+	<div id="h"><a href="<?php echo URLROOT;?>">星星站点博客</a></div>
+	<div id="important_tell">本来手机版还要过一段时间再开放的，由于我们的失误现把服务器上的system类更新了，使得手机反问会直接进入手机版。<br/>目前手机版还很不完善，可以点击底部的转到电脑版返回电脑版获得更完善的功能</div>
+	<?php $this->succ->show_script();?>

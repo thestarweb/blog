@@ -1,0 +1,62 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>essay.css"></link>
+<div class="left">
+	<div class="left_div">
+		<div class="h">查看文章<span><a href="<?php echo URLROOT;?>essay/list/1">返回文章列表</a></span></div>
+		<div id="body">
+			<br/>
+			<div id="title"><?php echo $essay['title'];?></div>
+			<br/>
+			<div id="time">发布时间:<?php echo date('Y-m-d H:i:s',$essay['time']);?></div>
+			<div id="types">
+<?php foreach($types as $t){?>
+			<a href="<?php echo URLROOT,'type/id/',$t['id'],'/1';?>" class="type"><?php echo $t['name'];?></a>
+<?php }?>
+			</div>
+			<br/><br/><br/>
+			<div id="content"><?php echo $essay['content'];?></div>
+		</div>
+	</div>
+	<div class="left_div">
+		<div class="h">评论</div>
+		<ul id="remarks">
+		<?php if($remarks){$sucs_url=$system->succ->get_server_url();foreach($remarks as $v){?>
+	<li><a href="<?php echo $sucs_url;?>/user/info/<?php echo $v['uid'];?>" target="_blank"><img src="<?php echo $sucs_url;?>/user/head/<?php echo $v['uid'];?>"/></a><?php echo date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
+		<?php }}else{?>
+		还没有评论
+		<?php } ?>
+		<ul>
+	</div>
+	<div class="left_div">
+		<div class="h">发表评论</div>
+		<div id="remark">游客需要登录才能回复<br/>如果已经登陆了，请检查是否打开了javascript</div>
+	</div>
+</div>
+<?php require $system->get_view('others');if(isset($_POST['suc_js_key'])){?>
+<script>
+//$('#content').innerHTML=myScript.sh_html($('#content').innerHTML,'<?php echo essay_server::sh;?>');
+myScript.marked($('#content').innerHTML,function(html){
+	$('#content').innerHTML=html;
+})
+suc_u_load(function(suc_u_info){
+	if(suc_u_info.u.username){
+		//suc_u_info.u.username:'游客';
+		var inputdiv=$('#remark');
+		inputdiv.innerHTML='<div id="remark_input"></div><input type="button" value="发布" id="send_remark"/>';
+		var input=new myScript.input('remark_input');
+		$('#send_remark').onclick=function(){
+			var ajax=$.ajax();
+			ajax.page=window.location.href.replace('/frame/#essay/id/','/essay/send_remark/');
+			ajax.setCont({
+				key:suc_u_info.u.key,
+				content:input.get()
+			});
+			ajax.callback=function(ajax){
+				if(ajax.text==1) window.location.reload(true)
+				else alert(ajax.text);
+			}
+			ajax.send();
+		}
+	}
+},<?php echo $_POST['suc_js_key'];?>);
+</script>
+<?php }?>

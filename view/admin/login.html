@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>all_style.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>admin_login.css">
+</head>
+<body>
+	<div style="float:right; color:#FFF; background-color:#F00; display:none;" id="doing"></div>
+	<div class="all">
+	<h1>sucs后台管理中心</h1>
+		<div class="login">
+			<p>1、已经在SUCS中登录</p>
+			<p>2、必须是管理员</p>
+			<p>3、必须是已经打开了js</p>
+			<form action="#" method="post">
+				<input type="text" name="key" id="key" style="display:none">
+				<input type="submit" value="进入后台"/>
+			</form>
+		</div>
+	</div>
+	<script src="<?php echo $system->ini_get('my_script_path');?>"></script>
+	<?php $system->succ->show_script();?>
+	<script language="javascript" type="text/javascript">
+	suc_u_load(function(suc_u_info){
+		$('#key').value=suc_u_info.u.key;
+	},<?php echo $system->succ->get_js_key();?>);
+	</script>
+</body>
+</html>

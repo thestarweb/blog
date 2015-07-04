@@ -1,0 +1,38 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-family: '微软雅黑';
+}
+body{
+	background:#9CE;
+}
+a,a:active,a:hover,a:visited{
+	color:#000;
+	text-decoration: none;
+}
+.block{
+	margin:11px;
+	box-shadow:5px 5px 11px 1px #99A;
+	background:rgba(255,255,255,0.7);
+	padding:5px;
+}
+#h,#h a{
+	background:#000;
+	color:#FFF;
+	font-size:20px
+}
+.nofile{
+	text-align:center;
+	border:2px outset #08F;
+	padding:2px;margin:2px;
+}
+#important_tell{
+	margin:11px 2px;
+	color:#88F;
+}
+.fanye{
+	text-align:center;
+}
+footer{
+	text-align:center;
+}

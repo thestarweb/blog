@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的播客（测试页）</title>
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>all.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>frame.css"/>
+<script src="<?php echo $system->ini_get('my_script_path');?>"></script>
+</head>
+<body>
+<div id="h">
+	<div>你好<span id="user">获取登录信息中</span></div>
+</div>
+<?php require $system->get_view('dh');?>
+<div id="main">
+	正在加载框架
+</div>
+<footer>
+	<p><?php echo VERSION_INFO;?></p>
+	<p><?php echo COPY;?></p>
+</footer>
+<br/><br/>
+<div id="bgm">
+	<div class="bgm_player">
+		<div class="bgm_left">
+			<div class="bgm_button" title="上一曲">
+				<div style="float:left;width:0;height:0;border:solid 5px transparent;border-right: solid 10px #FFF;margin-left:-15px;margin-top:-4px;"></div>
+				<div style="float:left;width:0;height:0;border:solid 5px transparent;border-right: solid 10px #FFF;margin-left:-6px;margin-top:-4px;"></div>
+			</div>
+			<div class="bgm_button" title="播放">
+				<div>
+					<div style="float:left;width:0;height:0;border:solid 5px transparent;border-left: solid 10px #FFF;left:-4px;top:-4px;"></div>
+				</div>
+				<div style="display:none;">
+					<div style="float:left;background:#FFF;width:4px;height:10px;left:-5px;top:-4px;"></div>
+					<div style="float:left;background:#FFF;width:4px;height:10px;left:1px;top:-14px;"></div>
+				</div>
+			</div>
+			<div class="bgm_button" title="下一曲">
+				<div style="float:left;width:0;height:0;border:solid 5px transparent;border-left: solid 10px #FFF;left:-9px;top:-4px;"></div>
+				<div style="float:left;width:0;height:0;border:solid 5px transparent;border-left: solid 10px #FFF;left:1px;top:-14px;"></div>
+			</div>
+		</div>
+		<div class="bgm_center">
+			<p id="bgm_s">bgm player loading / 背景音乐播放器加载中</p>
+			<div><p id="bgm_jd"></p></div>
+		</div>
+		<div class="bgm_right">
+			<div style="width:5px;height:8px;background:#FFF;top:50%;left:5px;margin-top:-4px"></div>
+			<div style="width:0;height:8px;top:50%;left:5px;margin-top:-13px;border:solid 5px transparent;border-right:solid 5px #FFF;"></div>
+			<div style="width:0;height:0px;top:5px;left:15px;border-left:solid 100px transparent;border-bottom:solid 11px #FFF;"><p id="bgm_yl"></p></div>
+		</div>
+	</div>
+</div>
+<script>
+//连接切换板块
+(function(){
+	flash_a=function(){
+		$('a').set('onclick',function(){
+			if(this.href.indexOf('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>')===0){
+				window.location.hash=this.href.replace('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>','');
+				//this.innerHTML='<h1>正在载入</h1>';
+				//get_page();
+				document.title='正在加载——星星站点博客';
+				return false;
+			}
+		});
+	};
+	var run_div_script=function(){
+		var script=$('#main').innerHTML.match(/<script>(.|\n|\r)+<\/script>/gi);
+		for(var i in script){
+			try{
+			eval(script[i].replace('<script>','').replace('<\/script>',''));
+			} catch (e){
+				alert(e);
+			}
+		}
+	}
+	var get_page=function(){
+		var temp=window.location.href.split('#');
+		var src='<?php echo URLROOT;?>';
+		if(temp[1]){
+			src+=temp[1];
+		}
+		var ajax=$.ajax();
+		ajax.page=src;
+		ajax.data='ajax=1&suc_js_key='+<?php echo $system->succ->get_js_key();?>;
+		ajax.callback=function(ajax){
+			//alert(ajax.text);
+			if(!ajax.json){
+				$('#main').innerHTML=ajax.text;
+				document.title='星星站点博客';
+			}else{
+				$('#main').innerHTML=ajax.json.body;
+				document.title=ajax.json.title;
+			}
+			flash_a();
+			
+			window.setTimeout(function(){
+				run_div_script()
+			},100);
+		}
+		ajax.send();
+	}
+	get_page();
+	window.onhashchange=function(){
+		this.innerHTML='<h1>正在载入</h1>';
+		get_page();
+	}
+})();
+//背景音乐版块
+(function(){
+	//var bgm_list=[];
+	var timeout=null;//播放失败用来切歌的定时器
+	var bgm_list=[
+			{name:'天宫之城',src:'/bgm1.mp3'},
+			{name:'童年',src:'/bgm2.mp3?1'}
+		];//音乐列表
+	var bgm_now=-1;
+	var s=$('#bgm_s');
+	//进度条
+	var bgm_jd=$('#bgm_jd');//进度滑块
+	/*bgm_jd.draggable="true";
+	bgm_jd.ondragstart=function(ev){
+		//controls.log(ev);
+		this.style.left=(parseInt(this.style.left)||0)+ev.x+"px";
+		//bgm_player_obj.currentTime=
+	}*/
+	bgm_jd.onmousedown=function(ev){
+		this.moving=ev.clientX;
+	}
+	bgm_jd.onmouseup=bgm_jd.onmouseout=function(ev){
+		this.moving=false;
+		ev.stopPropagation();
+	}
+	bgm_jd.onmousemove=function(ev){
+		if(this.moving){
+			this.left=parseFloat(this.style.left||0)+(ev.clientX-this.moving)/parseInt(this.parentNode.offsetWidth)*100;
+			this.left<0&&(this.left=0);
+			bgm_player_obj.currentTime=this.left*0.01*bgm_player_obj.duration;
+			this.style.left=this.left+"%";
+			this.moving=ev.clientX;
+		}
+	}
+	bgm_jd.parentNode.onclick=function(ev){//调整进度
+		if(bgm_player_obj.src&&ev.target==this){
+			//bgm_jd.style.left=ev.x+"px";
+			bgm_player_obj.currentTime=ev.x/parseInt(this.offsetWidth)*bgm_player_obj.duration;
+		}
+	}
+	//音量
+	var bgm_yl=$('#bgm_yl');
+	bgm_yl.parentNode.onclick=function(ev){
+		if(ev.x<0||ev.x>parseInt(this.offsetWidth)){
+			return;
+		}
+		bgm_yl.style.left=ev.x+'px';
+		var new_yl=ev.x/this.offsetWidth-0.05;
+		bgm_player_obj.volume=new_yl>0?new_yl:0;
+	}
+	bgm_yl.onmousedown=function(ev){
+		this.moving=ev.clientX;
+	}
+	bgm_yl.onmouseup=bgm_yl.onmouseout=function(ev){
+		this.moving=false;
+		ev.stopPropagation();
+	}
+	bgm_yl.onmousemove=function(ev){
+		if(this.moving){
+			var left=parseFloat(this.style.left||0)+ev.clientX-this.moving;
+			/**/
+			//bgm_player_obj.currentTime=this.left*0.01*bgm_player_obj.duration;
+			//this.style.left=this.left+"px";
+			bgm_yl.parentNode.onclick({x:left})
+			this.moving=ev.clientX;
+		}
+	}
+	var button=$('.bgm_button');//三个按钮
+	button[0].onclick=function(){
+		play_last();
+	};
+	button[1].onclick=function(){
+		if(this.children[0].style.display=='none'){
+			stop();
+		}else{
+			play();
+		}
+	};
+	button[2].onclick=function(){
+		play_next();
+	};
+
+	var bgm_player_obj=$.set('audio',$('#bgm'));//真正的背景音乐播放器
+	bgm_player_obj.controls=false;//因为各个浏览器界面不统一，我们不能用这个界面
+
+	var play=function(){//播放的方法
+		if(!bgm_player_obj.src){
+			play_next();
+			return;
+		}
+		bgm_player_obj.play();
+		s.innerHTML="正在播放："+bgm_list[bgm_now].name;
+		button[1].children[0].style.display='none';
+		button[1].children[1].style.display='';
+	};
+	var stop=function(){
+		bgm_player_obj.pause();
+		s.innerHTML="已经暂停："+bgm_list[bgm_now].name;
+		button[1].children[1].style.display='none';
+		button[1].children[0].style.display='';
+	}
+
+	var play_next=function(){
+		if(++bgm_now==bgm_list.length){
+			bgm_now=0;
+		}else if(!bgm_list.length){
+			alert('没有背景音乐');
+			return;
+		}
+		s.innerHTML="正在缓冲："+bgm_list[bgm_now].name;
+		if(timeout) window.clearTimeout(timeout);
+		bgm_player_obj.src=bgm_list[bgm_now].src;
+	};
+	var play_last=function(){
+		if(--bgm_now<0){
+			bgm_now=bgm_list.length-1;
+		}else if(!bgm_list.length){
+			alert('没有背景音乐');
+			return;
+		}
+		bgm_player_obj.src=bgm_list[bgm_now].src;
+		play();
+	};
+	bgm_player_obj.oncanplay=play;
+	bgm_player_obj.onended=play_next;
+	bgm_player_obj.onerror=function(){
+		stop();
+		s.innerHTML="加载失败："+bgm_list[bgm_now].name;
+		timeout=setTimeout(play_next,5000);
+	}
+	bgm_player_obj.ontimeupdate=function(ev){//更新进度条
+		bgm_jd.moving||(bgm_jd.style.left=this.currentTime/this.duration*100+'%');
+	}
+	bgm_player_obj.volume=0.5;//设置音量
+	//play_next();
+	/*var bgm=$.set('audio',$('#bgm'));
+	var now_bgm_name=$.set('span',$('#bgm'));
+	bgm.controls=true;
+	bgm.style.height='25px';
+	bgm_list=(function(){
+		var now_bgm=-1;
+		var bgm_list=[
+			{name:'天宫之城',src:'/bgm1.mp3'},
+			{name:'童年',src:'/bgm2.mp3'},
+		]
+		return {
+			paly_next:function(){
+				if(++now_bgm==bgm_list.length){
+					now_bgm=0
+				}else if(!bgm_list.length){
+					alert('没有背景音乐');
+					return;
+				}
+				bgm.src=bgm_list[now_bgm].src;
+				now_bgm_name.innerHTML="正在播放："+bgm_list[now_bgm].name;
+				bgm.play();
+			},
+			get_now:function (){
+				return bgm_list[now_bgm].name;
+			}
+		}
+	})();
+	bgm_list.paly_next();
+	bgm.onended=bgm_list.paly_next;
+	bgm.onpause=function(){
+		now_bgm_name.innerHTML="已暂停："+bgm_list.get_now();
+	}
+	bgm.onplaying=function(){
+		now_bgm_name.innerHTML="正在播放："+bgm_list.get_now();
+	}*/
+})();
+(function(){
+	var dh=$('#dh');
+	for (var i=0;dh.children[i];i++) {
+		dh.children[i].onmouseover=function(ev){
+			this.style.background='#E6E8FA';
+		};
+		dh.children[i].onmouseout=function(ev){
+			this.style.background='';
+		};
+	};
+})();
+//alert(myScript.get_os());
+</script>
+<?php $system->succ->show_script();?>
+<script>
+suc_u_load(function(suc_u_info){
+$('#user').innerHTML=suc_u_info.u.username?suc_u_info.u.username:'游客';
+},<?php echo $system->succ->get_js_key();?>);
+</script>
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>date.css"/>
+</body>
+</html>

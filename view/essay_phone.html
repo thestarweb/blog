@@ -1,0 +1,54 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>essay.css"></link>
+<div class="left">
+	<div class="left_div">
+		<div class="h"><span><a href="<?php echo URLROOT;?>essay_list">返回文章列表</a></span></div>
+		<div id="body" class="block">
+			<br/>
+			<div id="title"><?php echo $essay['title'];?></div>
+			<br/>
+			<div id="time">发布时间:<?php echo date('Y-m-d H:i:s',$essay['time']);?></div>
+			<div id="types">
+<?php foreach($types as $t){?>
+			<a href="<?php echo URLROOT,'type/id/',$t['id'];?>/1"><?php echo $t['name'];?></a>
+<?php }?>
+			</div>
+			<br/><br/><br/>
+			<div id="content"><?php echo $essay['content'];?></div>
+		</div>
+	</div>
+	<div  class="block">
+		<ul id="remarks">
+		<?php if($remarks){foreach($remarks as $v){?>
+	<li><img src="/sucs/user/head/<?php echo $v['uid'];?>"/><?php echo date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
+		<?php }}else{?>
+		还没有评论
+		<?php } ?>
+		<ul>
+	</div>
+	<div class="block" id="remark">
+		登录后才能评论哦
+	</div>
+</div>
+<script>
+$('#content').innerHTML=myScript.sh_html($('#content').innerHTML,'<?php echo essay_server::sh;?>');
+suc_u_load(function(suc_u_info){
+	if(suc_u_info.u.username){
+		var inputdiv=$('#remark');
+		inputdiv.innerHTML='<div id="remark_input"></div><input type="button" value="发布" id="send_remark"/>';
+		var input=new myScript.input('remark_input',(window.innerWidth-32),150,'br:;div:;p:');
+		$('#send_remark').onclick=function(){
+			var ajax=$.ajax();
+			ajax.page=window.location.href.replace('/essay/id/','/essay/send_remark/');
+			ajax.setCont({
+				key:suc_u_info.u.key,
+				content:input.get()
+			});
+			ajax.callback=function(ajax){
+				if(ajax.text==1) window.location.reload(true);
+				else alert(ajax.text);
+			}
+			ajax.send();
+		}
+	}
+},<?php echo $system->succ->get_js_key();?>);
+</script>

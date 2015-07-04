@@ -1,0 +1,20 @@
+
+.essay_li{
+	padding:5px;
+	border:1px outset #000;
+}
+.essay_li div{
+	overflow:hidden;
+}
+.essay_li .title{
+	font-size:30px;
+}
+#type_list,#other{
+	width:18%;
+	float:right;
+	margin:4px;
+	background:rgba(255,255,255,0.5);
+}
+.content p:before{
+	content:'　　';
+}

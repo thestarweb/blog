@@ -1,0 +1,27 @@
+<style>
+	#list{
+		padding: 0px;
+		line-height: 25px;
+	}
+	#list div{
+		border-bottom: solid 1.5px #000;
+		background:#08F;
+	}
+	#list li{
+		overflow: hidden;
+		border-bottom: solid 1px #555; 
+	}
+	#list span{
+		float: right;
+		width: 90px;
+	}
+</style>
+		<div id="list" class="block">
+			<div>标题<span>发布时间</span></div>
+			<ul>
+	<?php foreach ($list as $v) {?>
+				<a href="<?php echo URLROOT,'essay/',$v['id'];?>"><li><?php echo $v['title'];?><span><?php echo date('Y-m-d',$v['time']);?></span></li></a>
+	<?php } ?>
+			</ul>
+		</div>
+		<div class="fanye"><?php echo $ye;?></div>

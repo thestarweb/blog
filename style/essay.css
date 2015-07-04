@@ -1,0 +1,29 @@
+#body{
+	padding:20px;
+}
+#title{
+	text-align:center;
+	font-size:40px;
+}
+#types,#time{
+	text-align:center;
+}
+#content{
+	line-height:29px;
+}
+#types{
+	text-align:center;
+}
+#remarks li{
+	line-height:22px;
+	padding:2px;
+}
+#remarks img{
+	height:20px;
+	padding:2px;
+	margin-bottom:-8px;
+	background:#555;
+}
+#content p:before{
+	content:'　　';
+}
