@@ -24,6 +24,14 @@
 	margin-bottom:-8px;
 	background:#555;
 }
+#content{
+	overflow: hidden;
+}
 #content p:before{
 	content:'　　';
+}
+#remark_input{
+	margin: 2px 5px;
+	width: 98%;
+	height: 50px;
 }
