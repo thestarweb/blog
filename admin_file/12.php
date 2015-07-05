@@ -5,6 +5,7 @@ $type=new type_server($system);
 if(isset($_POST['getid'])){
 	$res=$essay->get_by_id($_POST['getid']);
 	$res['types']=$type->get_types_by_eid($_POST['getid']);
+	$res['content']=str_replace('%','%25',$res['content']);
 	$system->show_json($res);
 }elseif(isset($_POST['upid'])){
 	if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])&&isset($_POST['remove_type'])){
