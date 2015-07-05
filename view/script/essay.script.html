@@ -1,0 +1,26 @@
+<script>
+//$('#content').innerHTML=myScript.sh_html($('#content').innerHTML,'<?php echo essay_server::sh;?>');
+myScript.marked($('#content').innerHTML,function(html){
+	$('#content').innerHTML=html;
+})
+suc_u_load(function(suc_u_info){
+	if(suc_u_info.u.username){
+		//suc_u_info.u.username:'游客';
+		var inputdiv=$('#remark');
+		inputdiv.innerHTML='<textarea id="remark_input"></textarea><br/><input type="button" value="发布" id="send_remark"/>';
+		$('#send_remark').onclick=function(){
+			var ajax=$.ajax();
+			ajax.page=window.location.href.replace(typeof(sweb_blog_frame)!="undefined"?'/frame/#essay/id/':'/essay/id/','/essay/send_remark/');
+			ajax.setCont({
+				key:suc_u_info.u.key,
+				content:$('#remark_input').value
+			});
+			ajax.callback=function(ajax){
+				if(ajax.text==1) window.location.reload(true)
+				else alert(ajax.text);
+			}
+			ajax.send();
+		}
+	}
+},<?php echo isset($_POST['suc_js_key'])?$_POST['suc_js_key']:$system->succ->get_js_key();?>);
+</script>

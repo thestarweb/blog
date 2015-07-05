@@ -18,8 +18,8 @@
 	</div>
 	<div  class="block">
 		<ul id="remarks">
-		<?php if($remarks){foreach($remarks as $v){?>
-	<li><img src="/sucs/user/head/<?php echo $v['uid'];?>"/><?php echo date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
+		<?php if($remarks){$sucs_url=$system->succ->get_server_url();foreach($remarks as $v){?>
+	<li><img src="<?php echo $sucs_url;?>/user/head/<?php echo $v['uid'];?>"/><?php echo date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
 		<?php }}else{?>
 		还没有评论
 		<?php } ?>
@@ -29,26 +29,4 @@
 		登录后才能评论哦
 	</div>
 </div>
-<script>
-$('#content').innerHTML=myScript.sh_html($('#content').innerHTML,'<?php echo essay_server::sh;?>');
-suc_u_load(function(suc_u_info){
-	if(suc_u_info.u.username){
-		var inputdiv=$('#remark');
-		inputdiv.innerHTML='<div id="remark_input"></div><input type="button" value="发布" id="send_remark"/>';
-		var input=new myScript.input('remark_input',(window.innerWidth-32),150,'br:;div:;p:');
-		$('#send_remark').onclick=function(){
-			var ajax=$.ajax();
-			ajax.page=window.location.href.replace('/essay/id/','/essay/send_remark/');
-			ajax.setCont({
-				key:suc_u_info.u.key,
-				content:input.get()
-			});
-			ajax.callback=function(ajax){
-				if(ajax.text==1) window.location.reload(true);
-				else alert(ajax.text);
-			}
-			ajax.send();
-		}
-	}
-},<?php echo $system->succ->get_js_key();?>);
-</script>
+<?php require $system->get_view('script/essay.script',false);?>

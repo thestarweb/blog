@@ -31,32 +31,4 @@
 		<div id="remark">游客需要登录才能回复<br/>如果已经登陆了，请检查是否打开了javascript</div>
 	</div>
 </div>
-<?php require $system->get_view('others');if(isset($_POST['suc_js_key'])){?>
-<script>
-//$('#content').innerHTML=myScript.sh_html($('#content').innerHTML,'<?php echo essay_server::sh;?>');
-myScript.marked($('#content').innerHTML,function(html){
-	$('#content').innerHTML=html;
-})
-suc_u_load(function(suc_u_info){
-	if(suc_u_info.u.username){
-		//suc_u_info.u.username:'游客';
-		var inputdiv=$('#remark');
-		inputdiv.innerHTML='<div id="remark_input"></div><input type="button" value="发布" id="send_remark"/>';
-		var input=new myScript.input('remark_input');
-		$('#send_remark').onclick=function(){
-			var ajax=$.ajax();
-			ajax.page=window.location.href.replace('/frame/#essay/id/','/essay/send_remark/');
-			ajax.setCont({
-				key:suc_u_info.u.key,
-				content:input.get()
-			});
-			ajax.callback=function(ajax){
-				if(ajax.text==1) window.location.reload(true)
-				else alert(ajax.text);
-			}
-			ajax.send();
-		}
-	}
-},<?php echo $_POST['suc_js_key'];?>);
-</script>
-<?php }?>
+<?php require $system->get_view('others');require $system->get_view('script/essay.script');?>
