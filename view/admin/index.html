@@ -1,9 +1,3 @@
-<?php
-$menu=array(
-        array('title'=>'欢迎使用','is_menu'=>0,'page'=>'0'),
-        array('title'=>'后台管理','is_menu'=>1)
-);
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,7 +64,7 @@ p{
 	<tr>
 		<td colspan="2">
 			<p>by星星站点</p>
-			<p>2014.09.07</p><?php json_encode($menus);?>
+			<p>2014.09.07</p>
 		</td>
 	</tr>
 </table>
@@ -78,7 +72,6 @@ p{
 <script src="<?php echo $system->ini_get('my_script_path');?>"></script>
 <?php $system->succ->show_script();?>
 <script type="text/javascript">
-//var a=eval("("+<?php echo json_encode($menu);?>+")")；
 suc_u_load(function(suc_u_info){
 var menu=<?php echo json_encode($menus);?>;
 //var opening=[];
@@ -96,10 +89,6 @@ function set_menu(arr,dom){
 			set_menu_function(nd);
 		}else{
 			nd.onclick=function(){
-				/*var opening=$('.opening');
-				for(var j=0;opening[j];j++){
-					if(opening[j].title==this.innerHTML) return;
-				}*/
 				var t=$.set('div',$('#opening'))
 				t.innerHTML=this.innerHTML;
 				t.className='opening';
@@ -131,9 +120,7 @@ function set_menu_place(div,is_f){
 	}
 	div.style.left=div.p.offsetLeft+div.p.offsetWidth+div.p.parentNode.offsetLeft+'px';
  	div.style.top=div.p.offsetTop+div.p.parentNode.offsetTop+'px';
-	//alert(div.offsetWidth);
 	if((div.offsetLeft+div.offsetWidth)>=window.innerWidth){
-		//alert(div.offsetWidth);
 		div.style.left=div.p.parentNode.offsetLeft-div.offsetWidth+'px';
 	}
 	if(div.offsetHeight>window.innerHeight){
@@ -186,8 +173,6 @@ function set_menu_function(dom,is_first){
 					dom.off();
 				}
 			})(this),5);
-			//$('div')[0].removeChild(this.div);
-			//this.div=null;
 		}
 	}
 	dom.off=function(){
@@ -209,7 +194,6 @@ function go_to(dom){
 	now=dom;
 }
 function get_list(page,call_back){
-	//call_back([{title:'测试1',is_menu:0,src:'a',id:0},{title:'测试2',is_menu:1,src:'b',id:5},{title:'测试3',is_menu:0,src:'c',id:6},{title:'目录',is_menu:1,src:'test',id:10}]);
 	var ajax=$.ajax();
 	ajax.page=page;
 	ajax.data='key='+suc_u_info.u.key;
