@@ -82,10 +82,11 @@ function set_menu(arr,dom){
 	var nd;
 	dom.innerHTML='';
 	for(i in arr){
+		arr[i].is_menu=parseInt(arr[i].is_menu);
 		nd=$.set(dom.p?'div':'span',dom);
-		nd.innerHTML=arr[i].title;
+		nd.innerHTML=arr[i].title+(arr[i].is_menu?'·':'');
 		nd.info=arr[i];
-		if(parseInt(arr[i].is_menu)){
+		if(arr[i].is_menu){
 			set_menu_function(nd);
 		}else{
 			nd.onclick=function(){
