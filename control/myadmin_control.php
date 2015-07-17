@@ -37,4 +37,7 @@ class myadmin_control{
 			$this->list_page($system);
 		}
 	}
+	public function flash_page($system){
+		$this->admin->flash($this->uid);
+	}
 }
