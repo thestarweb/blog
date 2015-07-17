@@ -13,4 +13,7 @@ class remark_server{
 		$eid+=0;
 		return $this->system->db()->do_SQL('SELECT `uid`,`time`,`content` FROM `'.self::table.'` WHERE `eid`='.$eid.' ORDER BY `time` DESC LIMIT '.($page-1)*$limit.','.$limit);
 	}
+	public function get_all($page=1,$limit=10){
+		return $this->system->db()->do_SQL('SELECT `uid`,`time`,`content` FROM `'.self::table.'` ORDER BY `time` DESC LIMIT '.($page-1)*$limit.','.$limit);
+	}
 }
