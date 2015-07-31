@@ -1,14 +1,14 @@
 <?php
 class type_server{
 	private $system;
-	private $table='type';
+	const table='@%_type';
 	const link_table='@%_type_link';
 	//private $link_table='type_link';
 	public function __construct($system){
 		$this->system=$system;
 	}
 	public function get_list($limit=5,$page=1){
-		return $this->system->db()->do_SQL('SELECT `id`,`name` FROM `'.$this->table.'` limit '.$limit*($page-1).','.$limit);
+		return $this->system->db()->do_SQL('SELECT `id`,`name` FROM `'.self::table.'` limit '.$limit*($page-1).','.$limit);
 	}
 	public function get_essay($tid,$page=1,$limit=20){
 		$tid+=0;
@@ -22,12 +22,12 @@ class type_server{
 	}
 	public function get_info_by_id($id){
 		$id+=0;
-		$res=$this->system->db()->do_SQL('SELECT `t`.`pid`,`t`.`name`,`t`.`id`,`t`.`info` FROM `'.$this->table.'` as `t` WHERE `id`='.$id);
+		$res=$this->system->db()->do_SQL('SELECT `t`.`pid`,`t`.`name`,`t`.`id`,`t`.`info` FROM `'.self::table.'` as `t` WHERE `id`='.$id);
 		return $res[0];
 	}
 	public function get_types_by_eid($eid){
 		$eid+=0;
-		return $this->system->db()->do_SQL('SELECT * FROM `'.self::link_table.'` AS `l` JOIN `'.$this->table.'` AS `t` ON `l`.`tid`=`t`.`id` WHERE `l`.`eid`='.$eid);
+		return $this->system->db()->do_SQL('SELECT * FROM `'.self::link_table.'` AS `l` JOIN `'.self::table.'` AS `t` ON `l`.`tid`=`t`.`id` WHERE `l`.`eid`='.$eid);
 	}
 	public function set_essay_type($eid,$tid){
 		$this->system->db()->do_SQL('INSERT INTO `'.self::link_table.'`(`eid`,`tid`) VALUE('.$eid.','.$tid.')');
