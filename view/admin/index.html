@@ -38,6 +38,7 @@ padding:2px;
 	float:right;
 }
 .menu_box{
+	background: #FFF;
 	position: absolute;
 }
 .menu_box div{
@@ -77,6 +78,7 @@ var menu=<?php echo json_encode($menus);?>;
 //var opening=[];
 var now;
 var t;
+var cd;
 function set_menu(arr,dom){
 	var i;
 	var nd;
@@ -100,10 +102,39 @@ function set_menu(arr,dom){
 				t.onclick=function(){
 					go_to(this);
 				}
-				if(now){
+				t.oncontextmenu=function(ev){//右键标签出菜单
+					if(!ev.x) ev.x=ev.clientX;
+					if(!ev.y) ev.y=ev.clientY;
+					var m=this;
+					cd=$.set('div',$('td')[2]);
+					cd.style.position='absolute';
+					cd.style.top=ev.y+"px";
+					cd.style.left=ev.x+'px';
+					cd.className='menu_box';
+					cd.off=function(){
+						$.remove(cd);
+						vd=null;
+					}
+					var off=$.set('div',cd);
+					off.innerHTML='关闭标签';
+					off.onclick=function(){
+						$.remove(m.iframe);
+						$.remove(m);
+						cd.off();
+					}
+					var flash=$.set('div',cd);
+					flash.innerHTML='取消';
+					flash.onclick=function(){
+						//m.iframe.window.location.reload();
+						cd.off();
+					}
+					return false;
+				}
+				go_to(t);
+				/*if(now){
 					now.iframe.style.display='none';
 				}
-				now=t;
+				now=t;*/
 			}
 		}
 	}
@@ -157,7 +188,7 @@ function set_menu_function(dom,is_first){
 		}
 		get_list(this.info.src,(function(div){
 			return function(arr){//获取并挂载菜单
-			set_menu(arr,div);
+				set_menu(arr,div);
 			};
 		})(this.div));
 	}
@@ -190,9 +221,13 @@ function set_menu_function(dom,is_first){
 }
 set_menu(menu,$('#menu'));
 function go_to(dom){
-	now.iframe.style.display='none';
+	if(now){
+		now.iframe.style.display='none';
+		now.style.background='';
+	}
 	dom.iframe.style.display='';
 	now=dom;
+	now.style.background='rgba(255,255,255,0.5)';
 }
 function get_list(page,call_back){
 	var ajax=$.ajax();
@@ -225,6 +260,7 @@ window.onresize=function(){
 	off_all_menu();
 }
 document.onclick=function(){
+	if(cd) cd.off();
 	off_all_menu();
 }
 $('#flash').onclick=function(){

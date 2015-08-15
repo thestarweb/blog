@@ -13,7 +13,6 @@ class admin_server{
 		}else{
 			$uid+=0;//echo $uid.'--';exit;
 			$res=$this->system->db()->do_SQL('SELECT `page`.`id`,`page`.`title`,`page`.`is_menu`,`page`.`src` FROM `'.self::page_table.'` AS `page` JOIN `'.self::admin_table.'` AS `admin` ON `page`.`id`=`admin`.`pid` WHERE `page`.`pid`='.$id.' AND `admin`.`uid`='.$uid);
-	//	var_dump($res);
 		}
 		foreach($res as &$v){
 			if(!$v['src'])$v['src']=URLROOT.'myadmin/view?id='.$v['id'];
