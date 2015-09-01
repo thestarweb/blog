@@ -15,7 +15,12 @@
 	</div>
 	<script>
 		var list=$('.content');
-			for(var i=0;i<list.length;i++){
-				list[i].innerHTML=myScript.sh_html(list[i].innerHTML,'<?php echo essay_server::sh;?>');
-			}
-		</script>
+		for(var i=0;i<list.length;i++){
+			//list[i].innerHTML=myScript.sh_html(list[i].innerHTML,'<?php echo essay_server::sh;?>');
+			myScript.marked(list[i].innerHTML,(function(dom){
+				return function(html){
+					dom.innerHTML=html;
+				}
+			})(list[i]),{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
+		}
+	</script>

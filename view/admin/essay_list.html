@@ -38,7 +38,7 @@ $('.e').set('onclick',function(){
 	//编辑
 	//this.parentNode.parentNode.id
 	myScript.show('标题<input id="title" type="text" value="'+1+'" /><select id="es"></select><div id="content"></div><div id="type"><div><select id="unselect_type" size="9"><?php foreach ($all_types as $value) {?><option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option><?php } ?></select></div><div><input type="button" value=">>" id="add_type"/><br/><input type="button" value="<<" id="remove_type"/></div><div><select id="select_type" size="9"></select></div></div><input id="ok" type="button" value="提交" />',610,350,'修改文章');
-	var content=new myScript.input('content',590,240,'<?php echo essay_server::sh;?>');
+	var content=new myScript.input('content',590,240,{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
 	var p=this.parentNode.parentNode;
 	sid=p.getAttribute('sid');
 	

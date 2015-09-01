@@ -41,7 +41,7 @@ $('#remove_type').onclick=function(){
 	$.remove(dom);
 	$('#unselect_type').appendChild(dom);
 }
-var input=new myScript.input('in',800,500);
+var input=new myScript.input('in',800,500,{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
 //alert(input);
 $('@send')[0].onclick=function(){
 	alert(input.get());

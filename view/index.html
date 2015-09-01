@@ -37,6 +37,6 @@
 			return function(html){
 				dom.innerHTML=html;
 			}
-		})(list[i]));
+		})(list[i]),{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
 	}
 </script>
