@@ -1,0 +1,16 @@
+<table>
+	<tr>
+		<th>分类id</th>
+		<th>分类名称</th>
+		<th>父分类id</th>
+		<th>父分类名称</th>
+	</tr>
+<?php foreach ($list as $v) {?>
+	<tr>
+		<td><?php echo $v['id'];?></td>
+		<td><?php echo $v['name'];?></td>
+		<td><?php echo $v['p_id'];?></td>
+		<td><?php echo $v['p_name'];?></td>
+	</tr>
+<?php } ?>
+</table>
