@@ -5,10 +5,16 @@
 		<th>父分类id</th>
 		<th>父分类名称</th>
 	</tr>
+	<tr>
+		<td>0</td>
+		<td><a href="<?php echo $system->url_addget('tid',0,$surl);?>">root</a></td>
+		<td></td>
+		<td></td>
+	</tr>
 <?php foreach ($list as $v) {?>
 	<tr>
 		<td><?php echo $v['id'];?></td>
-		<td><?php echo $v['name'];?></td>
+		<td><a href="<?php echo $system->url_addget('tid',$v['id'],$surl);?>"><?php echo $v['name'];?></a></td>
 		<td><?php echo $v['p_id'];?></td>
 		<td><?php echo $v['p_name'];?></td>
 	</tr>
