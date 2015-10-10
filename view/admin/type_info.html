@@ -2,4 +2,15 @@
 <h1><?php echo $info['name']?></h1>
 <textarea id="" cols="50" rows="5" value="<?php echo $info['info'];?>"><?php echo $info['info'];?></textarea>
 <input type="button" value="更新简介"/>
-<?php var_dump($info);?>
+<table>
+	<tr>
+		<th>分类id</th>
+		<th>分类名称</th>
+	</tr>
+<?php foreach ($clist as $v) {?>
+	<tr>
+		<td><?php echo $v['id'];?></td>
+		<td><a href="<?php echo $system->url_addget('tid',$v['id']);?>"><?php echo $v['name'];?></a></td>
+	</tr>
+<?php } ?>
+</table>

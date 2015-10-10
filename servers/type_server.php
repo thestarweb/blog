@@ -10,6 +10,10 @@ class type_server{
 	public function get_list($limit=5,$page=1){
 		return $this->system->db()->do_SQL('SELECT `id`,`name` FROM `'.self::table.'` limit '.$limit*($page-1).','.$limit);
 	}
+	public function get_clist($id){
+		$id+=0;
+		return $this->system->db()->do_SQL('SELECT `id`,`name` FROM `'.self::table.'` WHERE `pid`='.$id);
+	}
 	public function get_list_p($limit=5,$page=1){
 		return $this->system->db()->do_SQL('SELECT `s`.`id`,`s`.`name`,`p`.`id` AS `p_id`,`p`.`name` AS `p_name` FROM `'.self::table.'` AS `s`LEFT JOIN `'.self::table.'` AS `p` ON `s`.`pid`=`p`.`id` limit '.$limit*($page-1).','.$limit);
 	}
