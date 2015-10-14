@@ -7,7 +7,10 @@ switch (isset($_GET['doing'])?$_GET['doing']:'') {
 	case 'select':
 		$_GET['tid']=isset($_GET['tid'])?$_GET['tid']:0;
 		$info=$_GET['tid']!=0?$type->get_info_by_id($_GET['tid']):array('name' =>'root','info'=>'这是根分类，便于管理使用','id'=>0);;
-		if($info) $clist=$type->get_clist($_GET['tid']);
+		if($info){
+			$clist=$type->get_clist($_GET['tid']);
+			$plist=$type->get_list_p(20);
+		}
 		include $system->get_view('admin/type_info');
 		break;
 	case 'delete':

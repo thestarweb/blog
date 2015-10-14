@@ -19,4 +19,17 @@
 		<td><?php echo $v['p_name'];?></td>
 	</tr>
 <?php } ?>
+	<tr>
+		<td></td>
+		<td><input type="text"></td>
+		<td>
+			<select id="pid">
+				<option value="0">/</option>
+<?php foreach($list as $v){ ?>
+			<option value="<?php echo $v['id'];?>"><?php echo $v['name'];?></option>
+<?php } ?>
+			</select>
+		</td>
+		<td><input type="button"value="添加"></td>
+	</tr>
 </table>

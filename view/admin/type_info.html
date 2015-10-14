@@ -1,7 +1,17 @@
 <a href="<?php echo $system->url_addget('doing','');?>">返回列表</a>
 <h1><?php echo $info['name']?></h1>
+<div>
+	父分类:
+	<select id="pid">
+		<option value="0">/</option>
+<?php foreach($plist as $v){ ?>
+		<option value="<?php echo $v['id']; if($v['id']==$info['pid']){?>" selected="true<?php }?>"><?php echo $v['name'];?></option>
+<?php } ?>
+	</select>
+</div>
 <textarea id="" cols="50" rows="5" value="<?php echo $info['info'];?>"><?php echo $info['info'];?></textarea>
 <input type="button" value="更新简介"/>
+子分类：
 <table>
 	<tr>
 		<th>分类id</th>
