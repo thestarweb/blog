@@ -2,11 +2,16 @@
 $type=new type_server($system);
 switch (isset($_GET['doing'])?$_GET['doing']:'') {
 	case 'add':
-		# code...
+		if(isset($_POST['name'])&&isset($_POST['pid'])&&$_POST['name']){
+			$type->add($_POST['name'],$_POST['pid']);
+			$system->show_json(array('isok'=>1));
+		}else echo '缺少参数';
 		break;
 	case 'select':
 		$_GET['tid']=isset($_GET['tid'])?$_GET['tid']:0;
-		$info=$_GET['tid']!=0?$type->get_info_by_id($_GET['tid']):array('name' =>'root','info'=>'这是根分类，便于管理使用','id'=>0);;
+		$info=$_GET['tid']!=0?
+			$type->get_info_by_id($_GET['tid']):
+			array('name' =>'root','info'=>'这是根分类，便于管理使用','id'=>0);
 		if($info){
 			$clist=$type->get_clist($_GET['tid']);
 			$plist=$type->get_list_p(20);

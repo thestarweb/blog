@@ -36,6 +36,9 @@ class type_server{
 		$eid+=0;
 		return $this->system->db()->do_SQL('SELECT * FROM `'.self::link_table.'` AS `l` JOIN `'.self::table.'` AS `t` ON `l`.`tid`=`t`.`id` WHERE `l`.`eid`='.$eid);
 	}
+	public function add($name,$pid=0,$info=null){
+		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`name`,`pid`,`info`) VALUE(?,?,?)',array($name,$pid,$info));
+	}
 	public function set_essay_type($eid,$tid){
 		$this->system->db()->do_SQL('INSERT INTO `'.self::link_table.'`(`eid`,`tid`) VALUE('.$eid.','.$tid.')');
 	}

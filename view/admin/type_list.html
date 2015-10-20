@@ -21,7 +21,7 @@
 <?php } ?>
 	<tr>
 		<td></td>
-		<td><input type="text"></td>
+		<td><input type="text" id="name"/></td>
 		<td>
 			<select id="pid">
 				<option value="0">/</option>
@@ -30,6 +30,28 @@
 <?php } ?>
 			</select>
 		</td>
-		<td><input type="button"value="添加"></td>
+		<td><input type="button" value="添加" id="add"></td>
 	</tr>
 </table>
+<script>
+	$('#add').onclick=function(){
+		if($('#name').value){
+			var ajax=$.ajax();
+			ajax.page='<?php echo $system->url_addget('doing','add');?>';
+			ajax.setCont({
+				name:$('#name').value,
+				pid:$('#pid').value
+			});
+			ajax.callback=function(ajax){
+				if(ajax.json&&ajax.json.isok){
+					window.location.reload(true);
+				}else{
+					myscript.show(ajax.text);
+				}
+			}
+			ajax.send();
+		}else{
+			alert('请输入分类名');
+		}
+	}
+</script>
