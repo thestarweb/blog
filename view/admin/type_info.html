@@ -4,7 +4,7 @@
 	父分类:
 	<select id="pid">
 		<option value="0">/</option>
-<?php foreach($plist as $v){ ?>
+<?php if($info['id']) foreach($plist as $v){ if($v['id']==$info['pid']) continue;?>
 		<option value="<?php echo $v['id']; if($v['id']==$info['pid']){?>" selected="true<?php }?>"><?php echo $v['name'];?></option>
 <?php } ?>
 	</select>

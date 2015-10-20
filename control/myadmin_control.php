@@ -28,7 +28,9 @@ class myadmin_control{
 	public function view_page($system){
 		//var_dump($this);
 		if($this->type==1){
-		if(file_exists($file='./admin_file/'.$_GET['id'].'.php')){
+			$apath=$system->ini_get('controls_dir').'admin_file/';
+		if(file_exists($file=$apath.$_GET['id'].'.php')){
+			include_once $apath.'head.html';
 			include_once $file;
 		}else{
 			echo '页面丢失';
