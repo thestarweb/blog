@@ -39,6 +39,12 @@ class type_server{
 	public function add($name,$pid=0,$info=null){
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`name`,`pid`,`info`) VALUE(?,?,?)',array($name,$pid,$info));
 	}
+	public function remove($id){
+		$id+=0;
+		$this->system->db()->do_SQL('UPDATE `'.self::table.'` SET `pid`=0 WHERE `pid`='.$id);
+		$this->system->db()->do_SQL('DELETE FROM `'.self::link_table.'` WHERE `tid`='.$id);
+		$this->system->db()->do_SQL('DELETE FROM `'.self::table.'` WHERE `id`='.$id);
+	}
 	public function set_essay_type($eid,$tid){
 		$this->system->db()->do_SQL('INSERT INTO `'.self::link_table.'`(`eid`,`tid`) VALUE('.$eid.','.$tid.')');
 	}

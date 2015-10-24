@@ -20,7 +20,7 @@ switch (isset($_GET['doing'])?$_GET['doing']:'') {
 		include $system->get_view('admin/type_info');
 		break;
 	case 'delete':
-		# code...
+		if(isset($_GET['tid'])) $type->remove($_GET['tid']);
 		break;
 	default:
 		$list=$type->get_list_p(20);

@@ -27,3 +27,15 @@
 	</tr>
 <?php } ?>
 </table>
+<input type="button" value="删除本分类" id="delete"/>(请谨慎使用此功能) <br/>
+删除会使所有子分类移至根分类
+<script>
+	$('#delete').onclick=function(){
+		var ajax=$.ajax();
+		ajax.page='<?php echo $system->url_addget('doing','delete');?>';
+		ajax.callback=function(){
+			window.location.href='<?php echo $system->url_addget('doing','');?>'
+		}
+		ajax.send();
+	}
+</script>
