@@ -16,6 +16,7 @@ switch (isset($_GET['doing'])?$_GET['doing']:'') {
 			$clist=$type->get_clist($_GET['tid']);
 			$plist=$type->get_list_p(20);
 		}
+		$_GET['tid']==0||$nu=$type->get_essay_page($_GET['tid'],1);
 		include $system->get_view('admin/type_info');
 		break;
 	case 'delete':

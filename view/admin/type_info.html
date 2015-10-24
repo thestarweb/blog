@@ -11,6 +11,9 @@
 </div>
 <textarea id="" cols="50" rows="5" value="<?php echo $info['info'];?>"><?php echo $info['info'];?></textarea>
 <input type="button" value="更新简介"/>
+<br/>
+<?php if(isset($nu))echo '此分类下共有<a href="',URLROOT,'type/id/',$_GET['tid'],'/1" target="_blank">',$nu,'</a>篇文章';?>
+<br/>
 子分类：
 <table>
 	<tr>
