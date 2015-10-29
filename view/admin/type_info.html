@@ -1,16 +1,16 @@
 <a href="<?php echo $system->url_addget('doing','');?>">返回列表</a>
-<h1><?php echo $info['name']?></h1>
+<h1><input id="name" type="input" value="<?php echo $info['name']?>"/></h1>
 <div>
 	父分类:
 	<select id="pid">
 		<option value="0">/</option>
-<?php if($info['id']) foreach($plist as $v){ if($v['id']==$info['pid']) continue;?>
+<?php if($info['id']) foreach($plist as $v){ if($v['id']==$info['id']) continue;?>
 		<option value="<?php echo $v['id']; if($v['id']==$info['pid']){?>" selected="true<?php }?>"><?php echo $v['name'];?></option>
 <?php } ?>
 	</select>
 </div>
-<textarea id="" cols="50" rows="5" value="<?php echo $info['info'];?>"><?php echo $info['info'];?></textarea>
-<input type="button" value="更新简介"/>
+<textarea id="info" cols="50" rows="5" value="<?php echo $info['info'];?>"><?php echo $info['info'];?></textarea>
+<input type="button" id="update" value="更新简介"/>
 <br/>
 <?php if(isset($nu))echo '此分类下共有<a href="',URLROOT,'type/id/',$_GET['tid'],'/1" target="_blank">',$nu,'</a>篇文章';?>
 <br/>
@@ -37,5 +37,19 @@
 			window.location.href='<?php echo $system->url_addget('doing','');?>'
 		}
 		ajax.send();
+	}
+	$('#update').onclick=function(){
+		var ajax=$.ajax();
+		ajax.page='<?php echo $system->url_addget('doing','update');?>';
+		ajax.setCont({
+			name:$('#name').value,
+			info:$('#info').value,
+			pid:$('#pid').value
+		});
+		ajax.callback=function(ajax){
+			if(ajax.text) alert(ajax.text);
+			else window.location.reload(true);
+		}
+		ajax.send();	
 	}
 </script>

@@ -19,6 +19,13 @@ switch (isset($_GET['doing'])?$_GET['doing']:'') {
 		$_GET['tid']==0||$nu=$type->get_essay_page($_GET['tid'],1);
 		include $system->get_view('admin/type_info');
 		break;
+	case 'update':
+		if(isset($_GET['tid'])&&isset($_POST['info'])&&isset($_POST['name'])&&isset($_POST['pid'])){
+			$type->update($_GET['tid'],$_POST['name'],$_POST['info'],$_POST['pid']);
+		}else{
+			echo '缺少参数';
+		}
+		break;
 	case 'delete':
 		if(isset($_GET['tid'])) $type->remove($_GET['tid']);
 		break;

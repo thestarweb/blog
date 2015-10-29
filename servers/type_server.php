@@ -51,4 +51,7 @@ class type_server{
 	public function remove_essay_type($eid,$tid){
 		$this->system->db()->do_SQL('DELETE FROM `'.self::link_table.'` WHERE `eid`='.$eid.' AND `tid`='.$tid);
 	}
+	public function update($id,$name,$info,$pid){
+		$this->system->db()->u_do_SQL('UPDATE `'.self::table.'` SET `name`=?,`info`=?,pid=? WHERE `id`=?',array($name,$info,$pid,$id));
+	}
 }

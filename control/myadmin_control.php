@@ -29,12 +29,12 @@ class myadmin_control{
 		//var_dump($this);
 		if($this->type==1){
 			$apath=$system->ini_get('controls_dir').'admin_file/';
-		if(file_exists($file=$apath.$_GET['id'].'.php')){
-			include_once $apath.'head.html';
-			include_once $file;
-		}else{
-			echo '页面丢失';
-		}
+			if(file_exists($file=$apath.$_GET['id'].'.php')){
+				if(!isset($_SERVER["isajax"])) include_once $apath.'head.html';
+				include_once $file;
+			}else{
+				echo '页面丢失';
+			}
 		}else{
 			$this->list_page($system);
 		}
