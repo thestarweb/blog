@@ -40,4 +40,7 @@ class essay_server{
 		$res=$this->system->db()->do_SQL('SELECT max(`id`) AS `max` FROM `'.self::table.'`');
 		return $res[0]['max'];
 	}
+	public function get_for_out($start,$limit){
+		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`content`,`display`,`sender` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$start.','.$limit);
+	}
 }

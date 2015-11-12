@@ -45,7 +45,7 @@ class admin_server{
 		$uid+=0;
 		$db=$this->system->db();
 		//清除旧记录
-		$db->do_SQL('UPDATE `'.$this->admin_table.'` SET `type`=0 WHERE `type`!=1 AND `uid`='.$uid);
+		$db->do_SQL('UPDATE `'.self::admin_table.'` SET `type`=0 WHERE `type`!=1 AND `uid`='.$uid);
 		//查询已经授权的列
 		$res=$db->do_SQL('SELECT `a`.`pid` AS `id`,`p`.`is_menu` FROM `'.self::admin_table.'` AS `a` LEFT JOIN `'.self::page_table.'` AS `p` ON `a`.`pid`=`p`.`id` WHERE `a`.`type`=1 AND `a`.`uid`='.$uid);
 		$list=array();$new=array();
