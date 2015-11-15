@@ -62,6 +62,7 @@ INSERT INTO `admin_pages` (`id`, `pid`, `title`, `is_menu`, `src`) VALUES
 (1, 0, '文章管理', 1, NULL),
 (11, 1, '发布文章', 0, NULL),
 (12, 1, '文章列表', 0, NULL),
+(15, 1, '导入/导出', 0, NULL),
 (2, 0, '分类管理', 0, NULL),
 (3, 0, '评论管理', 1, NULL),
 (14, 3, '所有评论', 0, NULL);
