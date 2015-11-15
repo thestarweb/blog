@@ -28,6 +28,11 @@ class essay_server{
 		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`) VALUE(?,?,?,?)',array($title,time(),$content,$uid));
 	}
+	public function in($title,$content,$uid,$time,$display){
+		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
+		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
+		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`) VALUE(?,?,?,?,?)',array($title,$time,$content,$uid,$display));
+	}
 	public function update($id,$title,$content){
 		$this->system->db()->u_do_SQL('UPDATE `'.self::table.'` SET `title`=?,`content`=? WHERE `id`=?',array($title,htmlentities($content,ENT_NOQUOTES,'utf-8'),$id));
 	}

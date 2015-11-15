@@ -41,12 +41,29 @@
 			unlink('./out.download.temp.xml');
 			break;
 		case 'in':
-			switch ($isset($_POST['type'])?$_POST['type']:'') {
-				case 'value':
-					$system->db()->do_SQL('TRUNCATE TABLE `'.essay::table.'`');
-					$system->db()->do_SQL('TRUNCATE TABLE `'.essay::link_table.'`');
+			switch (isset($_POST['type'])?$_POST['type']:'') {
+				case 'clean':
+					$system->db()->do_SQL('TRUNCATE TABLE `'.essay_server::table.'`');
+					$system->db()->do_SQL('TRUNCATE TABLE `'.type_server::link_table.'`');
 				default:
-					# code...
+					$es=new essay_server($system);
+					$ts=new type_server($system);
+					$xt=new xml_tool($_FILES['in_xml']['tmp_name']);
+					$len=$xt->how_many('/essays/essay');
+					for($i=0;$i<$len;$i++) { 
+						$es->in($xt->look('/essays/essay/title',$i),
+							$xt->look('/essays/essay/content',$i),
+							$xt->look('/essays/essay/sender',$i),
+							$xt->look('/essays/essay/time',$i),
+							$xt->look('/essays/essay/display',$i)
+						);
+						$type_s=$xt->look('/essays/essay/etypes',$i);
+						$types=explode(',',$type_s);
+						$eid=$es->get_max_id();
+						foreach ($types as $v){
+							if($v)$ts->set_essay_type($eid,$v);
+						}
+					}
 					break;
 			}
 		default:

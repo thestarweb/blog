@@ -3,21 +3,18 @@
 	<p>导出范围
 		<form action="<?php echo $system->url_addget('doing','out');?>" method="post" target="d">
 			<input type="number" id="out_min" name="min"/>-<input type="number" id="out_max" name="max"/>
-			<input type="submit" value="导出" id="out1">
+			<input type="submit" value="导出" id="out1"/>
 		</form>
 	<p>
 </div>
-<script>
-	/*$('#out1').onclick=function(){
-		var ajax=$.ajax()
-		ajax.data='';
-		if($('#out_min').value!='') ajax.data+='min='+$('#out_min').value;
-		if($('#out_max').value!='') ajax.data+='&max='+$('#out_max').value;
-		ajax.page='<?php echo $system->url_addget('doing','out');?>';
-		ajax.callback=function(ajax){
-			alert(ajax.text);
-		}
-		ajax.send();
-	}*/
-</script>
+<div>
+	<h1>导入文章</h1>
+	<p>
+		<form action="<?php echo $system->url_addget('doing','in');?>" method="post" target="d" enctype="multipart/form-data">
+			<input type="hedden" name="type" value="clean"/>
+			<input type="file" name="in_xml"/>
+			<input type="submit" value="导入（同时清空原数据）"/>
+		</form>
+	<p>
+</div>
 <iframe src="" frameborder="0" style="display:no;" name="d"></iframe>
