@@ -5,8 +5,10 @@
 			$xt=new xml_tool('./out.download.temp.xml','essays');
 			$start=isset($_POST['min'])&&$_POST['min']!=''?$_POST['min']-1:0;
 			$end=isset($_POST['max'])&&$_POST['max']!=''?$_POST['max']+0:9999999;
+			//导出文章
 			if($start>$end) return;
 			$es=new essay_server($system);
+			$ts=new type_server($system);
 			$oid=0;
 			while($start<$end){
 				if($start+10>$end){
@@ -22,7 +24,13 @@
 					$xt->add('/essays/essay',$oid,'content',html_entity_decode($essay['content'],ENT_NOQUOTES));
 					$xt->add('/essays/essay',$oid,'time',$essay['time']);
 					$xt->add('/essays/essay',$oid,'sender',$essay['sender']);
-					$xt->add('/essays/essay',$oid++,'display',$essay['display']);
+					$xt->add('/essays/essay',$oid,'display',$essay['display']);
+					$etypes=$ts->get_types_by_eid($essay['id']);
+					$et='';
+					foreach($etypes as $etype){
+						$et.=$etype['tid'].',';
+					}
+					$xt->add('/essays/essay',$oid++,'etypes',$et);
 				}
 			}
 			$xt->save();
@@ -33,7 +41,14 @@
 			unlink('./out.download.temp.xml');
 			break;
 		case 'in':
-			#
+			switch ($isset($_POST['type'])?$_POST['type']:'') {
+				case 'value':
+					$system->db()->do_SQL('TRUNCATE TABLE `'.essay::table.'`');
+					$system->db()->do_SQL('TRUNCATE TABLE `'.essay::link_table.'`');
+				default:
+					# code...
+					break;
+			}
 		default:
 			include $system->get_view('admin/essay_io',false);
 	}
