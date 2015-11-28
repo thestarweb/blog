@@ -7,3 +7,12 @@ code charset utf-8
 我们建议把ini文件移动到外部不可访问的文件夹或使用其他方式进行保护（同时需保护ini同目录下生成的ini.temp文件），以免数据库密码泄露
 修改index.php让它能找到system类（作为基础性的类，暂时把他放到Tools项目中了）和ini文件
 确保重写规则可用应该就没有问题了
+
+#nginx参考重写规则（把“{your root/}”改成自己实际的目录 务必加上后面的斜杠）：
+if ( !-e $request_filename){
+	rewrite ^/{your root/}.*$ /{your root/}index.php last;
+}
+
+#阿帕奇参考重写规则（把“{your root/}”改成自己实际的目录 务必加上后面的斜杠）：
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^{your root/}(.*) /{your root/}index.php/$1
