@@ -12,7 +12,7 @@
 			<p>1、已经在SUCS中登录</p>
 			<p>2、必须是管理员</p>
 			<p>3、必须是已经打开了js</p>
-			<form action="#" method="post">
+			<form action="#" method="post" id="login">
 				<input type="text" name="key" id="key" style="display:none">
 				<input type="submit" value="进入后台"/>
 			</form>
@@ -23,6 +23,11 @@
 	<script language="javascript" type="text/javascript">
 	suc_u_load(function(suc_u_info){
 		$('#key').value=suc_u_info.u.key;
+		if(suc_u_info.u.key){
+			$('#login').submit();
+		}else{
+			window.location.href="<?php echo $system->succ->login_page();?>#"+window.location.href;
+		}
 	},<?php echo $system->succ->get_js_key();?>);
 	</script>
 </body>
