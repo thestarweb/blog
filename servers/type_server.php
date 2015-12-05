@@ -32,6 +32,10 @@ class type_server{
 		$res=$this->system->db()->do_SQL('SELECT `t`.`pid`,`t`.`name`,`t`.`id`,`t`.`info` FROM `'.self::table.'` as `t` WHERE `id`='.$id);
 		return $res[0];
 	}
+	public function get_info_by_ename($name){
+		$res=$this->system->db()->u_do_SQL('SELECT `t`.`pid`,`t`.`name`,`t`.`id`,`t`.`info` FROM `'.self::table.'` as `t` WHERE `ename`=?',array($name));
+		return $res?$res[0]:array();
+	}
 	public function get_types_by_eid($eid){
 		$eid+=0;
 		return $this->system->db()->do_SQL('SELECT * FROM `'.self::link_table.'` AS `l` JOIN `'.self::table.'` AS `t` ON `l`.`tid`=`t`.`id` WHERE `l`.`eid`='.$eid);
