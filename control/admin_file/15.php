@@ -50,7 +50,7 @@
 					$ts=new type_server($system);
 					$xt=new xml_tool($_FILES['in_xml']['tmp_name']);
 					$len=$xt->how_many('/essays/essay');
-					for($i=0;$i<$len;$i++) { 
+					for($i=$len;$i-->0;) { 
 						$es->in($xt->look('/essays/essay/title',$i),
 							$xt->look('/essays/essay/content',$i),
 							$xt->look('/essays/essay/sender',$i),
