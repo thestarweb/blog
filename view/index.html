@@ -1,9 +1,10 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>index.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>mk.css"/>
 <div class="left">
 	<div class="left_div">
 		<div class="h">文章列表<span><a href="<?php echo URLROOT;?>essay/list/1">更多</a></span></div>
 	<?php if($essay_list) foreach($essay_list as $v){ ?>
-		<div class="essay_li">
+		<div class="essay_li mk">
 		<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 			<h1 class="title"><?php echo $v['title'];?></h1>
 			<div><?php $types=$type->get_types_by_eid($v['id']);foreach($types as $t){?>

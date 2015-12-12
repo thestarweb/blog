@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>essay.css"></link>
+<link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>mk.css"/>
 <div class="left">
 	<div class="left_div">
 		<div class="h"><span><a href="<?php echo URLROOT;?>essay_list">返回文章列表</a></span></div>
@@ -13,7 +14,7 @@
 <?php }?>
 			</div>
 			<br/><br/><br/>
-			<div id="content"><?php echo $essay['content'];?></div>
+			<div id="content" class="mk"><?php echo $essay['content'];?></div>
 		</div>
 	</div>
 	<div  class="block">
