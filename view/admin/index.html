@@ -69,7 +69,7 @@ p{
 		</td>
 	</tr>
 </table>
-
+<div style="display:none"><form action="#" method="post" id="gform" target="opiframe"><input type="text" name="key" id="postkey"></form></div>
 <script src="<?php echo $system->ini_get('my_script_path');?>"></script>
 <?php $system->succ->show_script();?>
 <script type="text/javascript">
@@ -97,7 +97,17 @@ function set_menu(arr,dom){
 				t.className='opening';
 				t.title=this.innerHTML;
 				var iframe=$.set('iframe',$('#web'));
-				iframe.src=this.info.src+'&key='+suc_u_info.u.key;//打开页面
+				<?php if(isset($postkey)){?>
+				iframe.name='opiframe';
+				var f=$('#gform');
+				//alert(f.target);
+				f.action=this.info.src;
+				$('#postkey').value='<?php echo $postkey;?>';
+				f.submit();
+				iframe.name='';
+				<?php }else{?>
+				iframe.src=this.info.src;//+'&key='+suc_u_info.u.key;//打开页面
+				<?php } ?>
 				t.iframe=iframe;
 				t.onclick=function(){
 					go_to(this);

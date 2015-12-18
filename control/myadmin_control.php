@@ -20,6 +20,7 @@ class myadmin_control{
 	public function index_page($system){
 		//$admin=new admin_server($system);
 		$menus=$this->admin->get_list(0,$this->uid);
+		$postkey=$_POST['key'];
 		require $system->get_view('admin/index');
 	}
 	public function list_page($system){

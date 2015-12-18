@@ -38,7 +38,7 @@ $('.e').set('onclick',function(){
 	
 	var ajax=$.ajax();
 	ajax.page=window.location.href;
-	ajax.data='getid='+sid;
+	ajax.data='key=<?php echo $_POST['key'];?>&getid='+sid;
 	ajax.callback=function(ajax){
 		if(ajax.json){
 			content.set(ajax.json.content);
@@ -104,7 +104,8 @@ $('.e').set('onclick',function(){
 			title:$('#title').value,
 			'content':content.get(),
 			add_type:tadd.toString(),
-			remove_type:tremove.toString()
+			remove_type:tremove.toString(),
+			key:'<?php echo $_POST['key'];?>'
 		});
 		ajax.callback=function(ajax){
 			alert(ajax.text);

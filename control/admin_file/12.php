@@ -30,7 +30,7 @@ if(isset($_POST['getid'])){
 }else{
 	$page=isset($_GET['page'])?$_GET['page']+0:1;
 	$essay=new essay_server($system);
-	$fenye=new fenye_tool($essay->get_page(10),$page,'?id=12&key='.$_GET['key'].'&page=');
+	$fenye=new fenye_tool($essay->get_page(10),$page,'?id=12&page=');
 	if($ye=$fenye->get()){
 		$list=$essay->get_list($page,10);
 		$all_types=$type->get_list(100);
