@@ -2,7 +2,7 @@
 	switch(isset($_GET['doing'])?$_GET['doing']:''){
 		case 'out':
 			//echo '<script>alert("',$_POST['min']==""?1:0,'");';
-			$xt=new xml_tool('./out.download.temp.xml','essays');
+			$xt=new xml_tool('./out.download.temp.xml','essays',true);
 			$start=isset($_POST['min'])&&$_POST['min']!=''?$_POST['min']-1:0;
 			$end=isset($_POST['max'])&&$_POST['max']!=''?$_POST['max']+0:9999999;
 			//导出文章
