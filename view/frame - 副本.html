@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>我的播客（测试页）</title>
+<script src="<?php echo URLROOT;?>myScript2.js" type="text/javascript"></script>
+<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+		/*position:relative;*/
+		font-family:"微软雅黑", "黑体", "华文行楷";
+		font-size:15px;
+		line-height: 21px;
+	}
+	#bgm{
+		width: 100%;
+		text-align: center;
+		bottom: 0;
+		background-color: #000;
+		height: 29px;
+		color: #FFF;
+		position: fixed;
+		line-height: 25px;
+		font-size: 15px;
+	}
+	#bgm audio{
+		margin-bottom: -8px;
+	}
+	body{
+		background-color: #08F;
+	}
+	#main{
+		background: rgba(255,255,255,0.5);
+	}
+	#h{
+		position: fixed;
+		top: 0;	
+		left: 0;
+		width: 100%;
+		background-color: #000;
+		height: 30px;
+		line-height: 30px;
+	}
+	#main,#h div,#dh{
+		width: 900px;
+		margin: 0 auto;
+	}
+	#h div{
+		color: #FFF;
+		line-height: 30px;
+	}
+	#dh{
+		background-color: rgba(200,128,255,0.9);
+		line-height: 29px;
+	}
+	#dh a{
+		padding:5px;
+	}
+</style>
+</head>
+<body>
+<div id="h"><div>你好</div></div>
+<?php require $system->get_view('dh');?>
+<div id="main">
+	正在加载框架
+</div>
+<div id="bgm">背景音乐播放器</div>
+<script>
+//连接切换板块
+(function(){
+	flash_a=function(){
+		$('a').set('onclick',function(){
+			if(this.href.indexOf('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>')===0){
+				window.location.hash=this.href.replace('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>','');
+				//this.innerHTML='<h1>正在载入</h1>';
+				//get_page();
+				document.title='h'
+				return false;
+			}
+		});
+	};
+	get_page=function(){
+		var temp=window.location.href.split('#');
+		var src='<?php echo URLROOT;?>';
+		if(temp[1]){
+			src+=temp[1];
+		}
+		var ajax=$.ajax();
+		ajax.page=src;
+		ajax.data='ajax=1';
+		ajax.callback=function(ajax){
+			$('#main').innerHTML=ajax.text;
+			flash_a();
+		}
+		ajax.send();
+	}
+	get_page();
+	window.onhashchange=function(){
+		this.innerHTML='<h1>正在载入</h1>';
+		get_page();
+	}
+})();
+//背景音乐版块
+(function(){
+	var bgm=$.set('audio',$('#bgm'));
+	var now_bgm_name=$.set('span',$('#bgm'));
+	bgm.controls=true;
+	bgm.style.height='25px';
+	bgm_list=(function(){
+		var now_bgm=-1;
+		var bgm_list=[
+			{name:'天宫之城',src:'/bgm1.mp3'},
+			{name:'童年',src:'/bgm2.mp3'},
+		]
+		return {
+			paly_next:function(){
+				if(++now_bgm==bgm_list.length){
+					now_bgm=0
+				}else if(!bgm_list.length){
+					alert('没有背景音乐');
+					return;
+				}
+				bgm.src=bgm_list[now_bgm].src;
+				now_bgm_name.innerHTML="正在播放："+bgm_list[now_bgm].name;
+				bgm.play();
+			},
+			get_now:function (){
+				return bgm_list[now_bgm].name;
+			}
+		}
+	})();
+	//bgm_list.paly_next();
+	bgm.onended=bgm_list.paly_next;
+	bgm.onpause=function(){
+		now_bgm_name.innerHTML="已暂停："+bgm_list.get_now();
+	}
+	bgm.onplaying=function(){
+		now_bgm_name.innerHTML="正在播放："+bgm_list.get_now();
+	}
+})();
+(function(){
+	var dh=$('#dh');
+	for (var i=0;dh.children[i];i++) {
+		dh.children[i].onmouseover=function(ev){
+			this.style.background='#888';
+		};
+		dh.children[i].onmouseout=function(ev){
+			this.style.background='';
+		};
+	};
+})();
+alert(myScript.get_os());
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<style>
+	#list{
+		padding: 5px;
+		line-height: 25px;
+	}
+	#list div{
+		border-bottom: solid 1.5px #000;
+	}
+	#list li{
+		overflow: hidden;
+		border-bottom: solid 1px #555; 
+	}
+</style>
+<div class="left">
+	<div class="left_div">
+		<div class="h">分类列表</div>
+		<div id="list">
+			<div>标题</div>
+			<ul>
+<?php foreach($list as $v) {?>
+				<a href="<?php echo URLROOT,'type/id/',$v['id'];?>"><li><?php echo $v['name'];?></li></a>
+<?php } ?>
+			</ul>
+		</div>
+	</div>
+	<div class="left_div">
+		<div class="h">翻页</div>
+		<div class="fanye"><?php echo $ye;?></div>
+	</div>
+</div>
+<?php require $system->get_view('others');?>

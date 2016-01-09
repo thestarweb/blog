@@ -1,8 +1,8 @@
 <div id="list">
-			<div>标题<span>发布时间</span></div>
-			<ul>
+	<div>标题<span>发布时间</span></div>
+	<ul>
 <?php foreach($list as $v) {?>
-				<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>"><li><?php echo $v['title'];?><span><?php echo date('Y-m-d',$v['time']);?></span></li></a>
+		<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>"><li><?php echo $v['title'];?><span><?php echo date('Y-m-d',$v['time']);?></span></li></a>
 <?php } ?>
-			</ul>
-		</div>
+	</ul>
+</div>
