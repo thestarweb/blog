@@ -50,7 +50,8 @@ $('@send')[0].onclick=function(){
 	ajax.setCont({
 		title:$('input')[0].value,
 		content:input.get(),
-		types:type_data
+		types:type_data,
+		key:"<?php echo $_POST['key'];?>"
 	});
 	ajax.callback=function(ajax){
 		alert(ajax.text);
