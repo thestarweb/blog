@@ -22,7 +22,7 @@
 	</div>
 </div>
 <div class="right_div">
-	<div class="h">分类列表</div>
+	<div class="h">分类列表<span><a href="<?php echo URLROOT;?>type/list/1">更多</a></span></div>
 	<div><ul>
 <?php foreach($type_list as $v){?>
 	<li><a href="<?php echo URLROOT,'type/id/',$v['id'];?>/1"><?php echo $v['name'];?></a></li>
