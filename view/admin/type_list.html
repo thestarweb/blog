@@ -40,7 +40,8 @@
 			ajax.page='<?php echo $system->url_addget('doing','add');?>';
 			ajax.setCont({
 				name:$('#name').value,
-				pid:$('#pid').value
+				pid:$('#pid').value,
+				key:'<?php echo $_POST['key'];?>'
 			});
 			ajax.callback=function(ajax){
 				if(ajax.json&&ajax.json.isok){

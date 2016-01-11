@@ -33,6 +33,7 @@
 	$('#delete').onclick=function(){
 		var ajax=$.ajax();
 		ajax.page='<?php echo $system->url_addget('doing','delete');?>';
+		ajax.data='key=<?php echo $_POST['key'];?>'
 		ajax.callback=function(){
 			window.location.href='<?php echo $system->url_addget('doing','');?>'
 		}
@@ -44,7 +45,8 @@
 		ajax.setCont({
 			name:$('#name').value,
 			info:$('#info').value,
-			pid:$('#pid').value
+			pid:$('#pid').value,
+			key:'<?php echo $_POST['key'];?>'
 		});
 		ajax.callback=function(ajax){
 			if(ajax.text) alert(ajax.text);
