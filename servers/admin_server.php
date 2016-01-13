@@ -21,6 +21,7 @@ class admin_server{
 	}
 	public function can_visit($uid,$id){
 		if($uid===false) return false;
+		$uid+=0;$id+=0;
 		if($uid==0){
 			if($id==0)return 1;
 			$res=$this->system->db()->do_SQL('SELECT `is_menu` FROM `'.self::page_table.'` AS `p` WHERE `id`='.$id);
@@ -28,7 +29,6 @@ class admin_server{
 				return $res[0]['is_menu']+1;
 			}
 		}else{
-			$uid+=0;$id+=0;
 			if($id==0){
 				return $this->system->db()->do_SQL('SELECT `id` FROM `'.self::admin_table.'` WHERE `uid`='.$uid.' LIMIT 1')?2:false;
 			}
@@ -50,13 +50,11 @@ class admin_server{
 		$res=$db->do_SQL('SELECT `a`.`pid` AS `id`,`p`.`is_menu` FROM `'.self::admin_table.'` AS `a` LEFT JOIN `'.self::page_table.'` AS `p` ON `a`.`pid`=`p`.`id` WHERE `a`.`type`=1 AND `a`.`uid`='.$uid);
 		$list=array();$new=array();
 		//需要的连接
-		var_dump($res);
 		foreach($res as $v){
 			//$this->add($uid,$v['pid'],3);
 			if($v['is_menu']||$v['id']==0) array_push($list,$v);
 		}
 		//遍历所以子项
-		var_dump($list);
 		while($item=array_pop($list)){
 			$res=$db->do_SQL('SELECT `id`,`is_menu` FROM `'.self::page_table.'` WHERE `pid`='.$item['id']);
 			foreach($res as $v){

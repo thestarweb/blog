@@ -13,12 +13,15 @@ class essay_server{
 		$this->system=$system;
 	}
 	public function get_list_with_content($limit){
+		$limit+=0;
 		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`content`,`display` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$limit);
 	}
 	public function get_list($page,$limit=20){
+		$limit+=0;
 		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`sender`,`display` FROM `'.self::table.'` ORDER BY `time` DESC limit '.($page-1)*$limit.','.$limit);
 	}
 	public function get_page($limit=20){
+		$limit+=0;
 		$res=$this->system->db()->do_SQL('SELECT COUNT(`id`) AS `nu` FROM `'.self::table.'`');
 		return ceil($res[0]['nu']/$limit);
 	}
@@ -46,6 +49,7 @@ class essay_server{
 		return $res[0]['max'];
 	}
 	public function get_for_out($start,$limit){
+		$start+=0;$limit+=0;
 		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`content`,`display`,`sender` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$start.','.$limit);
 	}
 }

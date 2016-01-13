@@ -20,11 +20,11 @@ class type_server{
 		return $this->system->db()->do_SQL('SELECT `id`,`name` FROM `'.self::table.'` WHERE `pid`='.$id);
 	}
 	public function get_list_p($limit=5,$page=1){
-		$limit+=0;$page+=0;
+		$limit+=0;
 		return $this->system->db()->do_SQL('SELECT `s`.`id`,`s`.`name`,`p`.`id` AS `p_id`,`p`.`name` AS `p_name` FROM `'.self::table.'` AS `s`LEFT JOIN `'.self::table.'` AS `p` ON `s`.`pid`=`p`.`id` limit '.$limit*($page-1).','.$limit);
 	}
 	public function get_essay($tid,$page=1,$limit=20){
-		$limit+=0;$page+=0;
+		$limit+=0;
 		$tid+=0;
 		return $this->system->db()->do_SQL('SELECT * FROM `'.self::link_table.'` AS `l` JOIN `'.essay_server::table.'` AS `e` ON `l`.`eid`=`e`.`id` WHERE `l`.`tid`='.$tid.' ORDER BY `time` DESC LIMIT '.($page-1)*$limit.','.$limit);
 	}
