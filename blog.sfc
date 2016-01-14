@@ -1,8 +1,9 @@
 <?php
 //版本及版权信息
-			define('VERSION','1.1.4.0139');
-			define('MAKE_TIME','2016-01-11');
+			define('VERSION','1.1.4.0140');
+			define('MAKE_TIME','2016-01-14');
 			define('VERSION_INFO',VERSION.' (alpha)&nbsp;'.MAKE_TIME);
 			define('COPY','星星站点博客&copy;2013-2016 星星站点 保留所有权利');
 			require_once $this->cfgs['p_succ'].'/succ.php';
 			$this->succ=succ::get_obj();
+			$this->succ->set_app_info($this->cfgs['p_succ_app_id'],$this->cfgs['p_succ_key']);

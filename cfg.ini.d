@@ -26,4 +26,6 @@ debug=1
 
 my_script_path=http://static.thestarweb.sweb/myScript2.js
 
-p_succ=../succ/		#非常重要
+p_succ=../succ/		#非常重要（下同）
+p_succ_app_id=1
+p_succ_key=1234567890a
