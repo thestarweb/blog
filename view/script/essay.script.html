@@ -1,9 +1,7 @@
 <script>
 
 //$('#content').innerHTML=myScript.sh_html($('#content').innerHTML,'<?php echo essay_server::sh;?>');
-myScript.marked($('#content').innerHTML,function(html){
-	$('#content').innerHTML=html;
-},{img_url:'<?php echo $system->ini_get('imgs_url');?>'})
+myScript.marked_dom($('#content'),{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
 suc_u_load(function(suc_u_info){
 	if(suc_u_info.u.username){
 		//suc_u_info.u.username:'游客';
