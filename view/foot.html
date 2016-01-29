@@ -1,4 +1,16 @@
 </div>
+<footer>
+	<p><?php echo VERSION_INFO;?></p>
+	<p><?php echo COPY;?></p>
+</footer>
+<br/><br/>
 <div id="bgm">背景音乐播放器</div>
+<?php $this->succ->show_script();?>
+<script>
+suc_u_load(function(suc_u_info){
+$('#user').innerHTML=suc_u_info.u.username?suc_u_info.u.username:'游客';
+},<?php echo $this->succ->get_js_key();?>);
+</script>
+<link rel="stylesheet" type="text/css" href="<?php echo $this->ini_get('styles_url');?>date.css"/>
 </body>
 </html>

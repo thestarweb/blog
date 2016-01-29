@@ -2,8 +2,13 @@
 <html>
 <head>
 <title><?php echo $title;?></title>
-<script type="text/javascript">window.location.href='http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>frame/#'+window.location.href.replace('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>','');</script>
+<script type="text/javascript">function sue_bgm_player(){window.location.href='http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>frame/#'+window.location.href.replace('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>','');}</script>
+<script src="<?php echo $this->ini_get('my_script_path');?>"></script>
+<link rel="stylesheet" href="<?php echo $this->ini_get('styles_url');?>all.css">
 </head>
 <body>
-<div id="h"><div>你好</div></div>
+<div id="h">
+	<div>你好<span id="user">获取登录信息中</span></div>
+</div>
+<?php require $this->get_view('dh');?>
 <div id="main">
