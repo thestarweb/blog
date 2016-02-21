@@ -25,11 +25,10 @@ class essay_server{
 		$res=$this->system->db()->do_SQL('SELECT COUNT(`id`) AS `nu` FROM `'.self::table.'`');
 		return ceil($res[0]['nu']/$limit);
 	}
-	public function add($title,$content){
-		$uid=1;
+	public function add($title,$content,$sender,$display=1){
 		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
 		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
-		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`) VALUE(?,?,?,?)',array($title,time(),$content,$uid));
+		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`) VALUE(?,?,?,?,?)',array($title,time(),$content,$sender,$display));
 	}
 	public function in($title,$content,$uid,$time,$display){
 		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');

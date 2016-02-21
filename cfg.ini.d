@@ -10,7 +10,7 @@
 # 4、请尽量避免删除.temo文件，它只是配置文件的缓存（因为我们程序读取ini的速度较慢，通过缓存有助于提高速度）
 
 #配置数据库
-db_type=mysql		#数据库类型 一般都为mysql，暂时也支持mysql
+db_type=mysql		#数据库类型 一般都为mysql，暂时也只支持mysql
 db_server=127.0.0.1		#数据库主机地址
 db_username=blog		#数据库用户名
 db_password=		#数据库密码
