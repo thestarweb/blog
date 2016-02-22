@@ -33,8 +33,9 @@ class myadmin_control{
 			if(file_exists($file=$apath.$_GET['id'].'.php')){
 				if(!isset($_SERVER["isajax"])) include_once $apath.'head.html';
 				include_once $file;
+				if(!isset($_SERVER["isajax"])) include_once $apath.'foot.html';
 			}else{
-				echo '页面丢失';
+				echo '未找到页面（页面丢失？错误的连接？）';
 			}
 		}else{
 			$this->list_page($system);
