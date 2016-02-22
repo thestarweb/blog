@@ -1,4 +1,25 @@
 <br/><br/><br/>
 <p style="text-align:center;">星星站点博客 后台</p>
+<!--保持登陆信息打开页面-->
+<div style="display:none;">
+	<form action="#" method="post" id="goto">
+		<input type="text" name="key" id="key" value="" style="display:none">
+		<input type="submit" value="进入后台"/>
+	</form>
+</div>
+<script>
+	var tag_a=$('a');
+	var adminroot=window.location.href.substring(0,window.location.href.lastIndexOf("/")+1)
+	for(var i in tag_a){
+		if(tag_a[i].href.indexOf(adminroot)===0){
+			tag_a[i].onclick=function(){
+				$("#key").value="<?php echo $_POST['key'];?>";
+				$('#goto').action=this.href;
+				$("#goto").submit();
+				return false;
+			}
+		}
+	}
+</script>
 </body>
 </html>
