@@ -109,7 +109,8 @@ CREATE TABLE IF NOT EXISTS `type` (
   `id` tinyint(4) NOT NULL,
   `name` varchar(20) COLLATE utf8_bin NOT NULL,
   `info` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
-  `pid` tinyint(4) NOT NULL DEFAULT '0'
+  `pid` tinyint(4) NOT NULL DEFAULT '0',
+  `ename` varchar(10)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
