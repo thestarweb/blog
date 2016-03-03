@@ -40,6 +40,7 @@ class essay_server{
 	}
 	public function get_by_id($id){
 		$id+=0;
+		$this->system->db()->do_SQL('UPDATE `'.self::table.'` SET `hot`=`hot`+1 WHERE `id`='.$id);//访问增加热度
 		$res=$this->system->db()->do_SQL('SELECT `display`,`title`,`content`,`time` FROM `'.self::table.'` WHERE `id`='.$id.' LIMIT 1');
 		return $res?$res[0]:null;
 	}
