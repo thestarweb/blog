@@ -25,6 +25,7 @@
 					$xt->add('/essays/essay',$oid,'time',$essay['time']);
 					$xt->add('/essays/essay',$oid,'sender',$essay['sender']);
 					$xt->add('/essays/essay',$oid,'display',$essay['display']);
+					$xt->add('/essays/essay',$oid,'hot',$essay['hot']);
 					$etypes=$ts->get_types_by_eid($essay['id']);
 					$et='';
 					foreach($etypes as $etype){
@@ -55,7 +56,8 @@
 							$xt->look('/essays/essay/content',$i),
 							$xt->look('/essays/essay/sender',$i),
 							$xt->look('/essays/essay/time',$i),
-							$xt->look('/essays/essay/display',$i)
+							$xt->look('/essays/essay/display',$i),
+							$xt->look('/essays/essay/hot',$i)
 						);
 						$type_s=$xt->look('/essays/essay/etypes',$i);
 						$types=explode(',',$type_s);

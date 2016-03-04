@@ -30,7 +30,7 @@ class essay_server{
 		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`) VALUE(?,?,?,?,?)',array($title,time(),$content,$sender,$display));
 	}
-	public function in($title,$content,$uid,$time,$display){
+	public function in($title,$content,$uid,$time,$display,$hot){
 		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
 		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`) VALUE(?,?,?,?,?)',array($title,$time,$content,$uid,$display));
@@ -50,6 +50,6 @@ class essay_server{
 	}
 	public function get_for_out($start,$limit){
 		$start+=0;$limit+=0;
-		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`content`,`display`,`sender` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$start.','.$limit);
+		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`content`,`display`,`sender`,`hot` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$start.','.$limit);
 	}
 }
