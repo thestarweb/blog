@@ -1,8 +1,8 @@
 <?php
 	switch(isset($_GET['doing'])?$_GET['doing']:''){
 		case 'out':
-			//echo '<script>alert("',$_POST['min']==""?1:0,'");';
 			$xt=new xml_tool('./out.download.temp.xml','essays',true);
+			//接收起始结束位置
 			$start=isset($_POST['min'])&&$_POST['min']!=''?$_POST['min']-1:0;
 			$end=isset($_POST['max'])&&$_POST['max']!=''?$_POST['max']+0:9999999;
 			//导出文章
@@ -34,7 +34,7 @@
 					$xt->add('/essays/essay',$oid++,'etypes',$et);
 				}
 			}
-			$xt->save();
+			$xt->save();//保存
 			header('Content-type: application/octet-stream');
 			header('Content-Disposition: attachment; filename=out.xml');
 			ob_clean();

@@ -52,4 +52,8 @@ class essay_server{
 		$start+=0;$limit+=0;
 		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`content`,`display`,`sender`,`hot` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$start.','.$limit);
 	}
+	public function get_hot_essay($limit=5){
+		$limit+=0;
+		return $this->system->db()->do_SQL('SELECT `id`,`title` FROM `'.self::table.'` ORDER BY `hot` DESC LIMIT '.$limit);
+	}
 }
