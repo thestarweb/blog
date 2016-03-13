@@ -6,15 +6,13 @@ class essay_control{
 		header('location: '.URLROOT.'essay/id/'.$id);
 	}
 	public function id_page($system,$id){
-		//var_dump($system->);
 		$server=new essay_server($system);
-		//var_dump($server);
 		$essay=$server->get_by_id($id);
 		if(!$essay){
 			echo '404';return;
 		}
 		if($essay['display']){
-			$system->show_head($essay['title'].'——星星站点博客');
+			$system->show_head($essay['title'].'——星星站点博客',array(),$essay['keyword']);
 			$type=new type_server($system);
 			$types=$type->get_types_by_eid($id);
 			$remark=new remark_server($system);
