@@ -9,16 +9,20 @@
 </div>
 <script>
 	var tag_a=$('a');
-	var adminroot=window.location.href.substring(0,window.location.href.lastIndexOf("/")+1)
-	for(var i in tag_a){
-		if(tag_a[i].href.indexOf(adminroot)===0){
+	var adminroot=window.location.href.substring(0,window.location.href.lastIndexOf("/")+1);
+	if(tag_a)for(var i in tag_a){
+		if(tag_a[i].href&&tag_a[i].href.indexOf(adminroot)===0){
 			tag_a[i].onclick=function(){
-				$("#key").value="<?php echo $_POST['key'];?>";
-				$('#goto').action=this.href;
-				$("#goto").submit();
+				go(this.href);
 				return false;
 			}
 		}
+	}
+	function go(url,iframename){
+		$("#key").value="<?php echo $_POST['key'];?>";
+		$('#goto').action=url;
+		$("#goto").target=iframename?iframename:'';
+		$("#goto").submit();
 	}
 </script>
 </body>

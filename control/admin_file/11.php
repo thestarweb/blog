@@ -1,9 +1,9 @@
 <?php
-if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['types'])){
+if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])){
 	$essay=new essay_server($system);
 	$essay->add($_POST['title'],$_POST['content'],$this->uid);
 	$eid=$essay->get_max_id();
-	$types=explode(',',$_POST['types']);
+	$types=explode(',',$_POST['add_type']);
 	$type=new type_server($system);
 	foreach ($types as $v){
 		$v+=0;

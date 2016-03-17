@@ -1,68 +1,8 @@
-<style>
-	#type{
-		overflow: hidden;
-	}
-	#type div{
-		float:left;
-	}
-</style>
-标题<input type="text"/>
-<div id="in"></div>
-<div id="display">
-	<span><input type="checkbox" checked="true"/>允许前台查看</span>
-	<span><input type="checkbox" value="2"/>锁定</span>
-	<span><input type="checkbox" value="4"/>限登陆可见</span>
-	<span><input type="checkbox"/>阅读权限限制</span>
-</div>
-<div id="type">
-	<div>
-		<select id="unselect_type" size="9">
-<?php foreach ($types as $value) {?>
-			<option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>
-<?php } ?>
-		</select>
-	</div>
-	<div><input type="button" value=">>" id="add_type"/><br/><input type="button" value="<<" id="remove_type"/></div>
-	<div>
-		<select id="select_type" size="9"></select>
-	</div>
-</div>
-<input type="button" value="发布" name="send"/>
+<?php include $system->get_view('admin/editor');?>
 <script>
-$('#add_type').onclick=function(){
-	var t=$('#unselect_type');
-	var dom=t[t.selectedIndex];
-	$.remove(dom);
-	$('#select_type').appendChild(dom);
-}
-$('#remove_type').onclick=function(){
-	var t=$('#select_type');
-	var dom=t[t.selectedIndex];
-	$.remove(dom);
-	$('#unselect_type').appendChild(dom);
-}
-var input=new myScript.input('in',800,500,{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
-//alert(input);
-$('@send')[0].onclick=function(){
-	alert(input.get());
-	//alert(myScript.html_sh('你好<br >啊','div:;br:;p:;'));return;
-	var ajax=$.ajax();
-	ajax.page=window.location.href;
-	var type_data='';
-	var type=$('#select_type');
-	for (var i = type.length - 1; i >= 0; i--) {
-		type_data+=type[i].value+','
-	};
-	ajax.setCont({
-		title:$('input')[0].value,
-		content:input.get(),
-		types:type_data,
-		key:"<?php echo $_POST['key'];?>"
-	});
-	ajax.callback=function(ajax){
-		alert(ajax.text);
-	};
-	ajax.send();
+essay_editor.submit_page=window.location.href;//提交地址
+essay_editor.callback=function(ajax){
+	alert(ajax.text);
 }
 </script>
 </body>

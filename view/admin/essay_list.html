@@ -1,11 +1,3 @@
-<style>
-	#type{
-		overflow: hidden;
-	}
-	#type div{
-		float:left;
-	}
-</style>
 <table>
 <tr>
 <th>标题</th>
@@ -28,15 +20,21 @@
 </table>
 <?php echo $ye;?>
 <script>
+//$("#editor_html").innerHTML='';
 $('.e').set('onclick',function(){
 	//编辑
-	//this.parentNode.parentNode.id
-	myScript.show('标题<input id="title" type="text" value="'+1+'" /><select id="es"></select><div id="content"></div><div id="type"><div><select id="unselect_type" size="9"><?php foreach ($all_types as $value) {?><option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option><?php } ?></select></div><div><input type="button" value=">>" id="add_type"/><br/><input type="button" value="<<" id="remove_type"/></div><div><select id="select_type" size="9"></select></div></div><input id="ok" type="button" value="提交" />',610,350,'修改文章');
-	var content=new myScript.input('content',590,240,{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
-	var p=this.parentNode.parentNode;
-	sid=p.getAttribute('sid');
+	var upid=this.parentNode.parentNode.getAttribute('sid');
+	myScript.show('<iframe name="up" style="width:99%;height:97%"/>',850,450,'修改文章');
+	go(window.location.href+"&getid="+upid,"up");
+	$("@up")[0].onload=function(){
+		var k=($("@up")[0].window||$("@up")[0].contentWindow).essay_editor;
+		k.submit_page=window.location.href+"&upid="+upid;
+		k.callback=function(ajax){
+			alert(ajax.text);
+		}
+	}
 	
-	var ajax=$.ajax();
+	/*var ajax=$.ajax();
 	ajax.page=window.location.href;
 	ajax.data='key=<?php echo $_POST['key'];?>&getid='+sid;
 	ajax.callback=function(ajax){
@@ -58,26 +56,6 @@ $('.e').set('onclick',function(){
 	ajax.send();
 
 	var tadd=[],tremove=[];
-	var add_type=function(i){
-		var dom=$('#unselect_type')[i];
-		$.remove(dom);
-		$('#select_type').appendChild(dom);
-	}
-	var remove_type=function(i){
-		var dom=$('#select_type')[i];
-		$.remove(dom);
-		$('#unselect_type').appendChild(dom);
-	}
-	var unset=function(arr,nu){
-		for(var i in arr){
-			if(arr[i]==nu){
-				//delete(arr[i]);
-				arr.splice(i,1);
-				return true;
-			}
-		}
-		return false;
-	}
 	$('#add_type').onclick=function(){
 		var s=$("#unselect_type")
 		var index=s.selectedIndex;
@@ -111,7 +89,7 @@ $('.e').set('onclick',function(){
 			alert(ajax.text);
 		}
 		ajax.send();
-	}
+	}*/
 });
 $('.d').set('onclick',function(){
 	alert('暂时不支持删除');
