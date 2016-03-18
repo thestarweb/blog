@@ -9,7 +9,7 @@ if(isset($_GET['getid'])){
 	$content=html_entity_decode($res['content'],ENT_NOQUOTES);
 	//$system->show_json($res);
 	$types=$type->get_list(100);
-	include $system->get_view('admin/editor');
+	include $system->get_view('admin/editor',false);
 }elseif(isset($_GET['upid'])){
 	if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])&&isset($_POST['remove_type'])){
 		$eid=$_GET['upid']+0;

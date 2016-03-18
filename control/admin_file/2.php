@@ -17,7 +17,7 @@ switch (isset($_GET['doing'])?$_GET['doing']:'') {
 			$plist=$type->get_list_p(20);
 		}
 		$_GET['tid']==0||$nu=$type->get_essay_page($_GET['tid'],1);
-		include $system->get_view('admin/type_info');
+		include $system->get_view('admin/type_info',false);
 		break;
 	case 'update':
 		if(isset($_GET['tid'])&&isset($_POST['info'])&&isset($_POST['name'])&&isset($_POST['pid'])){
@@ -32,7 +32,7 @@ switch (isset($_GET['doing'])?$_GET['doing']:'') {
 	default:
 		$list=$type->get_list_p(20);
 		$surl=$system->url_addget('doing','select');
-		include $system->get_view('admin/type_list');
+		include $system->get_view('admin/type_list',false);
 		//echo  $system->url_addget('doing','select');
 		break;
 }

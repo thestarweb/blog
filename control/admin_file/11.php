@@ -13,5 +13,5 @@ if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])){
 }else{
 	$type=new type_server($system);
 	$types=$type->get_list(100);
-	include $system->get_view('admin/add_essay');
+	include $system->get_view('admin/add_essay',false);
 }

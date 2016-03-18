@@ -13,7 +13,7 @@ class myadmin_control{
 				exit();
 			}
 		}else{
-			require $system->get_view('admin/login');
+			require $system->get_view('admin/login',false);
 			exit;
 		}
 	}
@@ -21,7 +21,7 @@ class myadmin_control{
 		//$admin=new admin_server($system);
 		$menus=$this->admin->get_list(0,$this->uid);
 		$postkey=$_POST['key'];
-		require $system->get_view('admin/index');
+		require $system->get_view('admin/index',false);
 	}
 	public function list_page($system){
 			$system->show_json(array('list'=>$this->admin->get_list($_GET['id'],$this->uid)));
