@@ -27,13 +27,25 @@
 		<select id="select_type" size="9"></select>
 	</div>
 </div>
-<div><input type="checkbox" id="auto_keword"></div>
+<div>关键字：星星站点,<input type="text" id="e_keywords" value="<?php if(isset($keywords)) echo $keywords;?>"/><input type="checkbox" id="auto_kewords">自动关键字</div>
 <input type="button" value="发布" id="editor_send"/>
 <script>
 essay_editor=(function(){
+	var get_keywords_by_type=function(){
+		var types=[];
+		var op=$("#select_type option");
+		for(var i=0;i<op.length;i++) types.push(op[i].innerHTML);
+		return types.toString();
+	}
+	var update_keywords=function(){
+		if($("#auto_kewords").checked){
+			$("#e_keywords").value=get_keywords_by_type();
+		}
+	}
 	var input=new myScript.input('in',800,500,{img_url:'<?php echo $system->ini_get('imgs_url');?>'},<?php echo isset($content)?json_encode($content):'""';?>);//创建编辑器
 	var tadd=[],tremove=[];//保存分类修改
 	var unset=function(arr,nu){//分类修改辅助方法
+		update_keywords();
 		for(var i in arr){
 			if(arr[i]==nu){
 				//delete(arr[i]);
@@ -46,29 +58,27 @@ essay_editor=(function(){
 	//增加分类
 	$('#add_type').onclick=function(){
 		var t=$('#unselect_type');
-		var index=t.selectedIndex;
-		if(!unset(tremove,t[index].value)){
-			tadd.push(t[index].value);
-		}
-		var dom=t[index];
+		var dom=t[t.selectedIndex];
 		$.remove(dom);
 		$('#select_type').appendChild(dom);
+		if(!unset(tremove,dom.value)){
+			tadd.push(dom.value);
+		}
 	}
-	//移出分类
+	//移除分类
 	$('#remove_type').onclick=function(){
 		var t=$('#select_type');
-		var index=t.selectedIndex;
-		if(!unset(tadd,t[index].value)){
-			tremove.push(t[index].value);
-		}
 		var dom=t[t.selectedIndex];
 		$.remove(dom);
 		$('#unselect_type').appendChild(dom);
+		if(!unset(tadd,dom.value)){
+			tremove.push(dom.value);
+		}
 	}
 	//
 	<?php if(isset($selected_type)){?>
 	var selected_type=<?php echo json_encode($selected_type);?>;
-	for (var j = selected_type.length - 1; j >= 0; j--) {
+	for (var j=0;j<selected_type.length;j++) {
 		for (var i = $('#unselect_type').length - 1; i >= 0; i--) {
 			if($('#unselect_type')[i].value==selected_type[j].tid){
 				var dom=$('#unselect_type')[i];
@@ -79,6 +89,8 @@ essay_editor=(function(){
 		};
 	};
 	<?php } ?>
+	//判断是否开启自动关键字
+	if(get_keywords_by_type()==$("#e_keywords").value)$("#auto_kewords").checked=true;
 	//控件组
 	var info={
 		submit_page:'',
@@ -95,6 +107,7 @@ essay_editor=(function(){
 			content:input.get(),
 			add_type:tadd.toString(),
 			remove_type:tremove.toString(),
+			keywords:$("#e_keywords").value,
 			key:"<?php echo $_POST['key'];?>"
 		});
 		ajax.callback=function(ajax){

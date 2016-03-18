@@ -12,7 +12,7 @@ class essay_control{
 			echo '404';return;
 		}
 		if($essay['display']){
-			$system->show_head($essay['title'].'——星星站点博客',array(),$essay['keyword']);
+			$system->show_head($essay['title'].'——星星站点博客',array(),$essay['keywords']);
 			$type=new type_server($system);
 			$types=$type->get_types_by_eid($id);
 			$remark=new remark_server($system);

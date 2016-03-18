@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `essay` (
   `sender` mediumint(8) unsigned NOT NULL,
   `display` tinyint(4) NOT NULL DEFAULT '1',
   `hot` int(10) NOT NULL DEFAULT '1',
-  `keyword` varchar(100) NOT NULL DEFAULT ''
+  `keywords` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------

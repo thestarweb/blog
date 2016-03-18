@@ -9,11 +9,12 @@ if(isset($_GET['getid'])){
 	$content=html_entity_decode($res['content'],ENT_NOQUOTES);
 	//$system->show_json($res);
 	$types=$type->get_list(100);
+	$keywords=$res['keywords'];
 	include $system->get_view('admin/editor',false);
 }elseif(isset($_GET['upid'])){
 	if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])&&isset($_POST['remove_type'])){
 		$eid=$_GET['upid']+0;
-		$essay->update($eid,$_POST['title'],$_POST['content']);
+		$essay->update($eid,$_POST['title'],$_POST['content'],$_POST['keywords']);
 		$add_type=explode(',',$_POST['add_type']);
 		var_dump($add_type);
 		foreach ($add_type as $v) {

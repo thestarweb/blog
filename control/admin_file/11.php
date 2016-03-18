@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])){
 	$essay=new essay_server($system);
-	$essay->add($_POST['title'],$_POST['content'],$this->uid);
+	$essay->add($_POST['title'],$_POST['content'],$this->uid,1,$_POST['keywords']);
 	$eid=$essay->get_max_id();
 	$types=explode(',',$_POST['add_type']);
 	$type=new type_server($system);
