@@ -19,8 +19,8 @@
 	</div>
 	<div  class="block">
 		<ul id="remarks">
-		<?php if($remarks){$sucs_url=$system->succ->get_server_url();foreach($remarks as $v){?>
-	<li><img src="<?php echo $sucs_url;?>/user/head/<?php echo $v['uid'];?>"/><?php echo date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
+		<?php if($remarks){foreach($remarks as $v){?>
+	<li><?php echo $system->succ->head_html($v['uid']),date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
 		<?php }}else{?>
 		还没有评论
 		<?php } ?>
