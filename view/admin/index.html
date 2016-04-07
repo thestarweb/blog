@@ -98,11 +98,11 @@ function set_menu(arr,dom){
 				t.title=this.innerHTML;
 				var iframe=$.set('iframe',$('#web'));
 				<?php if(isset($postkey)){?>
-				iframe.name='opiframe';
 				var f=$('#gform');
+				f.target=iframe.name='opiframe';
 				//alert(f.target);
-				f.action=this.info.src;
 				$('#postkey').value='<?php echo $postkey;?>';
+				f.action=this.info.src;
 				f.submit();
 				iframe.name='';
 				<?php }else{?>

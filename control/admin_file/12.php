@@ -38,6 +38,6 @@ if(isset($_GET['getid'])){
 	if($ye=$fenye->get()){
 		$list=$essay->get_list($page,10);
 		$types=$type->get_list(100);
-		include $system->get_view('admin/essay_list');
+		include $system->get_view('admin/essay_list',false);
 	}
 }
