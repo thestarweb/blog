@@ -3,6 +3,7 @@ class essay_server{
 	const sh='div:;p:;br:;a:href;img:src,width,height';
 	private $system;
 	const table='@%_essay';
+	const push_table='@%_push';
 	private $table;
 	public static $_display=array('隐藏','公开');
 	public static function display($i){
@@ -19,6 +20,10 @@ class essay_server{
 	public function get_list($page,$limit=20){
 		$limit+=0;
 		return $this->system->db()->do_SQL('SELECT `id`,`title`,`time`,`sender`,`display` FROM `'.self::table.'` ORDER BY `time` DESC limit '.($page-1)*$limit.','.$limit);
+	}
+	public function get_push($type,$limit=10){
+		$type+=0;$limit+=0;
+		return $this->system->db()->do_SQL('SELECT `e`.`id`,`e`.`title`,`e`.`time`,`e`.`content`,`e`.`display` FROM `'.self::table.'` as `e` JOIN `'.self::push_table.'` ON `e`.`id`=`'.self::push_table.'`.`essay` WHERE `'.self::push_table.'`.`type`='.$type.' LIMIT '.$limit);
 	}
 	public function get_page($limit=20){
 		$limit+=0;

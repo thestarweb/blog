@@ -85,6 +85,19 @@ CREATE TABLE IF NOT EXISTS `essay` (
   `keywords` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `push`
+--
+
+DROP TABLE IF EXISTS `push`;
+CREATE TABLE IF NOT EXISTS `push` (
+  `type` tinyint(4) NOT NULL,
+  `essay` int(11) NOT NULL
+) ENGINE=MyISAM;
+
 -- --------------------------------------------------------
 
 --
@@ -149,6 +162,12 @@ ALTER TABLE `admin_pages`
 ALTER TABLE `essay`
   ADD PRIMARY KEY (`id`),
   ADD KEY `time` (`time`);
+
+--
+-- Indexes for table `push`
+--
+ALTER TABLE `push`
+  ADD KEY `selecct_index` (`type`,`essay`);
 
 --
 -- Indexes for table `remark`
