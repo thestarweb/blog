@@ -17,7 +17,8 @@ class essay_control{
 			$types=$type->get_types_by_eid($id);
 			$remark=new remark_server($system);
 			$remarks=$remark->get($id);
-			if(strpos($_SERVER['HTTP_USER_AGENT'], 'baidu.com')) $essay['content']='<p style="color:#F00;">识别为蜘蛛抓取，markdowm在服务器端快速解析，部分格式可能不能完全显示。</p>'.marked_tool::marked($essay['content']);
+			$ob=array('img_url'=>$system->ini_get('imgs_url'));
+			if(strpos($_SERVER['HTTP_USER_AGENT'], 'baidu.com')) $essay['content']='<p style="color:#F00;">识别为蜘蛛抓取，markdowm在服务器端快速解析，部分格式可能不能完全显示。</p>'.marked_tool::marked($essay['content'],$ob);
 			include $system->get_view('essay');
 			$system->show_foot();
 		}else{

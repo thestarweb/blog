@@ -1,7 +1,7 @@
 <?php
 //版本及版权信息
-			define('VERSION','1.1.4.0164');
-			define('MAKE_TIME','2016-04-08');
+			define('VERSION','1.1.4.0166');
+			define('MAKE_TIME','2016-04-18');
 			define('VERSION_INFO',VERSION.' (alpha)&nbsp;'.MAKE_TIME);
 			define('COPY','星星站点博客&copy;2013-2016 星星站点 保留所有权利');
 			$this->cfgs['succ_dir']='../succ/';
