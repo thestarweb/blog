@@ -18,4 +18,16 @@ class api_control{
 			$cache->end_page_cache();
 		}
 	}
+	public function get_pushs_page($system,$c){
+		//	var_dump($_SERVER);exit;
+		header('Access-Control-Allow-Origin: *');
+		$uroot=($_SERVER['SERVER_PROTOCOL']=='HTTP/1.1'?'http://':'https://').$_SERVER['SERVER_NAME'].URLROOT.'essay/id';
+		$e=new essay_server($system);
+		$list=$e->get_push($c);
+		foreach ($list as &$v) {
+			$v['url']=$uroot.$v['id'];
+			unset($v['content']);
+		}
+		$system->show_json($list);
+	}
 }
