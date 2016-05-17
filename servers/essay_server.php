@@ -35,6 +35,10 @@ class essay_server{
 		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`,`keywords`) VALUE(?,?,?,?,?,?)',array($title,time(),$content,$sender,$display,$keywords));
 	}
+	public function add_push($eid,$type){
+		$eid+=0;$type+=0;
+		$this->system->db()->do_SQL('INSERT INTO `'.self::push_table.'`(`type`,`essay`) VALUE('.$type.','.$eid.')');
+	}
 	public function in($title,$content,$uid,$time,$display,$hot){
 		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
 		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');

@@ -1,0 +1,19 @@
+<table>
+	<tr><th>title</th><th>操作</th></tr>
+<?php foreach($e as $v) {?>
+	<tr><td><?php echo $v['title'];?></td><td>del</td></tr>
+<?php } ?>
+</table>
+推送 <select id="type"><option value="0">公告</option></select> 文章id:<input type="number" id="eid"/><input type="button" value="增加" id="add">
+<script>
+	$("#add").onclick=function(){
+		var ajax=$.ajax();
+		ajax.page="#";
+		ajax.data="doing=add&type="+$("#type").value+"&eid="+$("#eid").value+"&key=<?php echo $_POST['key'];?>";
+		ajax.callback=function(ajax){
+			alert(ajax.text);
+			window.location.reload(true);
+		}
+		ajax.send();
+	}
+</script>
