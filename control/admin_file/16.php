@@ -5,6 +5,9 @@
 			case 'add':
 				$s->add_push($_POST['eid'],$_POST['type']);
 				break;
+			case 'del':
+				$s->del_push($_POST['eid'],$_POST['type']);
+				break;
 			
 			default:
 				echo '参数错误';

@@ -1,7 +1,8 @@
+为保证网站运行速度，不建议设置太多推送
 <table>
 	<tr><th>title</th><th>操作</th></tr>
 <?php foreach($e as $v) {?>
-	<tr><td><?php echo $v['title'];?></td><td>del</td></tr>
+	<tr><td><?php echo $v['title'];?></td><td onclick="del(<?php echo $v['id'];?>,0)">取消推送</td></tr>
 <?php } ?>
 </table>
 推送 <select id="type"><option value="0">公告</option></select> 文章id:<input type="number" id="eid"/><input type="button" value="增加" id="add">
@@ -10,6 +11,16 @@
 		var ajax=$.ajax();
 		ajax.page="#";
 		ajax.data="doing=add&type="+$("#type").value+"&eid="+$("#eid").value+"&key=<?php echo $_POST['key'];?>";
+		ajax.callback=function(ajax){
+			alert(ajax.text);
+			window.location.reload(true);
+		}
+		ajax.send();
+	}
+	function del(eid,type){
+		var ajax=$.ajax();
+		ajax.page="#";
+		ajax.data="doing=del&type="+type+"&eid="+eid+"&key=<?php echo $_POST['key'];?>";
 		ajax.callback=function(ajax){
 			alert(ajax.text);
 			window.location.reload(true);

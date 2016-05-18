@@ -47,6 +47,9 @@ class essay_server{
 	public function update($id,$title,$content,$keywords){
 		$this->system->db()->u_do_SQL('UPDATE `'.self::table.'` SET `title`=?,`content`=?,`keywords`=? WHERE `id`=?',array($title,htmlentities($content,ENT_NOQUOTES,'utf-8'),$keywords,$id,));
 	}
+	public function del_push($eid,$type){
+		$this->system->db()->do_SQL('DELETE FROM `'.self::push_table.'` WHERE `essay`='.$eid.' && `type`='.$type);
+	}
 	public function get_by_id($id){
 		$id+=0;
 		$this->system->db()->do_SQL('UPDATE `'.self::table.'` SET `hot`=`hot`+1 WHERE `id`='.$id);//访问增加热度
