@@ -13,7 +13,7 @@ class api_control{
 			$e=new essay_server($system);
 			$list=$e->get_hot_essay();
 			foreach($list as $v){
-				echo '<li><a href="',URLROOT,'type/id/',$v['id'],'">',$v['title'],'</a></li>';
+				echo '<li><a href="',URLROOT,'essay/id/',$v['id'],'" target="_top">',$v['title'],'</a></li>';
 			}
 			$cache->end_page_cache();
 		}
