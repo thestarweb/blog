@@ -1,7 +1,7 @@
 <script>
 //$(function(){
-	myScript.marked_dom($('#content'),<?php echo json_encode($ob);?>);alert(123);
-	suc_u_load(function(suc_u_info){alert(233)
+	myScript.marked_dom($('#content'),<?php echo json_encode($ob);?>);
+	suc_u_load(function(suc_u_info){
 		if(suc_u_info.u.username){
 			var inputdiv=$('#remark');
 			inputdiv.innerHTML='<textarea id="remark_input"></textarea><br/><input type="button" value="发布" id="send_remark"/>';
