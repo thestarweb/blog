@@ -1,0 +1,71 @@
+	#bgm{
+		width: 100%;
+		text-align: center;
+		bottom: 0;
+		background-color: #000;
+		height: 39px;
+		color: #FFF;
+		position: fixed;
+		line-height: 25px;
+		font-size: 15px;
+	}
+	#bgm .bgm_player{
+		width:800px;
+		margin:0 auto;
+		overflow:hidden;
+		height:100%
+	}
+	#bgm .bgm_left{
+		float:left;
+		width:30%;
+		height:100%;
+		text-align:right;
+	}
+	#bgm .bgm_center{
+		float:left;
+		width:40%;
+		text-align:center;
+	}
+	#bgm .bgm_center div{
+		margin-top:2px;
+		height:5px;
+		background-color:#FFF;
+		margin-left: 9px;
+	}
+	#bgm_jd{
+		padding:5px;
+		width:0;
+		height:0;
+		background:#08F;
+		position:relative;
+		top:-2px;
+		margin-left:-5px;
+	}
+	#bgm .bgm_right{
+		float:left;
+		width:30%;
+		height:100%;
+		text-align:left;
+	}
+	#bgm_yl{
+		padding:9px 4px;
+		width:0;
+		height:0;
+		background:#08F;
+		position:relative;
+		top:-4px;
+		margin-left:-99px;
+		left:49px;
+	}
+	#bgm .bgm_button{
+		display: inline-block;
+		width:0;
+		height:0;
+		padding:17px;
+		border-radius:50%;
+		border: solid 2px #FFF;
+		/*position:relative;*/
+	}
+	#bgm audio{
+		margin-bottom: -8px;
+	}
