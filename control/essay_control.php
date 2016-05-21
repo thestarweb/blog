@@ -2,7 +2,7 @@
 class essay_control{
 	public function __call($id,$c){
 		$id+=0;
-		header("HTTP/1.1 301 Moved Permanently"); 
+		header("HTTP/1.1 307 Temporary Redirect"); 
 		header('location: '.URLROOT.'essay/id/'.$id);
 	}
 	public function id_page($system,$id){

@@ -19,7 +19,7 @@ class type_control{
 				}
 			}
 		}else{
-			header("HTTP/1.1 301 Moved Permanently"); 
+			header("HTTP/1.1 307 Temporary Redirect"); 
 			header('location: '.URLROOT.'type/id/'.$id.'/1');
 			exit;
 		}
