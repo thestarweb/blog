@@ -37,10 +37,12 @@
 	</div>
 </div>
 <script>
+var is_bgm_played=false;
 //连接切换板块
 (function(){
 	flash_a=function(){
 		$('a').set('onclick',function(){
+			if(!is_bgm_played) return;
 			if(this.href.indexOf('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>')===0){
 				//window.location.hash=this.href.replace('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>','');
 				//this.innerHTML='<h1>正在载入</h1>';
@@ -163,6 +165,7 @@
 			stop();
 		}else{
 			play();
+			is_bgm_played=true;
 		}
 	};
 	button[2].onclick=function(){

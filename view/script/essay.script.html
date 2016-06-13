@@ -1,9 +1,9 @@
 <script>
-//$(function(){
+$(function(){
 	myScript.marked_dom($('#content'),<?php echo json_encode($ob);?>);
 	suc_u_load(function(suc_u_info){
+		var inputdiv=$('#remark');
 		if(suc_u_info.u.username){
-			var inputdiv=$('#remark');
 			inputdiv.innerHTML='<textarea id="remark_input"></textarea><br/><input type="button" value="发布" id="send_remark"/>';
 			$('#send_remark').onclick=function(){
 				var ajax=$.ajax();
@@ -18,7 +18,9 @@
 				}
 				ajax.send();
 			}
+		}else{
+			inputdiv.innerHTML='游客游客需要<a href="<?php echo $system->succ->login_page();?>#'+window.location.href+'">　登录（点我登陆）　</a>才能发表评论';
 		}
 	},<?php echo isset($_POST['suc_js_key'])?$_POST['suc_js_key']:$system->succ->get_js_key();?>);
-//});
+});
 </script>
