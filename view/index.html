@@ -9,13 +9,13 @@
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 				<h1 class="title"><?php echo $v['title'];?></h1>
 			</a>
-			<div>
+			<div class="types">
 			<?php $types=$type->get_types_by_eid($v['id']);foreach($types as $t){?>
 			<a href="<?php echo URLROOT,'type/id/',$t['id'];?>/1" class="type"><?php echo $t['name'];?></a>
 			<?php }?>
 			</div>
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
-				<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
+				<div class="send_time"><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
 				<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
 			</a>
 		</div>
@@ -29,13 +29,13 @@
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 				<h1 class="title"><?php echo $v['title'];?></h1>
 			</a>
-			<div>
+			<div class="types">
 			<?php $types=$type->get_types_by_eid($v['id']);foreach($types as $t){?>
 			<a href="<?php echo URLROOT,'type/id/',$t['id'];?>/1" class="type"><?php echo $t['name'];?></a>
 			<?php }?>
 			</div>
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
-				<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
+				<div class="send_time"><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
 				<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
 			</a>
 		</div>

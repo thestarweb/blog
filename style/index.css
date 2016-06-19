@@ -1,6 +1,6 @@
 
 .essay_li{
-	padding:5px;
+	padding:11px;
 	border:1px outset #000;
 }
 .essay_li div{
@@ -8,6 +8,11 @@
 }
 .essay_li .title{
 	font-size:30px;
+	text-align: center;
+}
+.essay_li .types,.essay_li .send_time{
+	font-size: 12px;
+	text-align: center;
 }
 #type_list,#other{
 	width:18%;

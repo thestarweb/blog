@@ -9,6 +9,7 @@ body{
 	background:#000 url(../bg.jpg) center 0;
 	background-repeat:no-repeat;
 	background-attachment:fixed;
+	font-family: "微软雅黑";
 }
 #dh{
 	width: 800px;
@@ -72,6 +73,9 @@ body{
 	float:right;
 	width:19%;
 }
+.right_div div{
+	padding: 5px;
+}
 .right .right_div{
 	width:100%;
 }
@@ -88,6 +92,6 @@ a,a:active,a:hover,a:visited{
 	color:#000;
 	text-decoration: none;
 }
-.type{
-	color:#07E;
+.type,.type:active,.type:hover,.type:visited{
+	color:#05A;
 }

@@ -5,3 +5,6 @@
 	margin:11px;
 	box-shadow:5px 5px 11px 1px #99A;
 }
+.content p{
+	line-height: 29px;
+}
