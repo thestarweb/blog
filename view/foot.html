@@ -95,10 +95,15 @@ var is_bgm_played=false;
 (function(){
 	//var bgm_list=[];
 	var timeout=null;//播放失败用来切歌的定时器
-	var bgm_list=[
-			{name:'天宫之城',src:'/bgm1.mp3'},
-			{name:'童年',src:'/bgm2.mp3?1'}
-		];//音乐列表
+	var bgm_list=[];//音乐列表
+	var ajax=$.ajax();
+	ajax.page="<?php echo URLROOT?>bgm_list.json";
+	ajax.keep=true;
+	ajax.type='GET';
+	ajax.callback=function(ajax){
+		if(ajax.json)bgm_list=ajax.json;
+	}
+	ajax.send();
 	var bgm_now=-1;
 	var s=$('#bgm_s');
 	//进度条
