@@ -27,12 +27,12 @@
 		</div>
 		<div class="bgm_center">
 			<p id="bgm_s">bgm player loading / 背景音乐播放器加载中</p>
-			<div><p id="bgm_jd"></p></div>
+			<div style="cursor:pointer;"><p id="bgm_jd" style="cursor:pointer;"></p></div>
 		</div>
 		<div class="bgm_right">
-			<div style="width:5px;height:8px;background:#FFF;top:50%;left:5px;margin-top:-4px"></div>
+			<div style="width:5px;height:8px;background:#FFF;top:50%;left:5px;margin-top:-4px;cursor:pointer;"></div>
 			<div style="width:0;height:8px;top:50%;left:5px;margin-top:-13px;border:solid 5px transparent;border-right:solid 5px #FFF;"></div>
-			<div style="width:0;height:0px;top:5px;left:15px;border-left:solid 100px transparent;border-bottom:solid 11px #FFF;"><p id="bgm_yl"></p></div>
+			<div style="width:0;height:0px;top:5px;left:15px;border-left:solid 100px transparent;border-bottom:solid 11px #FFF;cursor:pointer;"><p id="bgm_yl"></p></div>
 		</div>
 	</div>
 </div>
@@ -90,7 +90,9 @@ var is_bgm_played=false;
 	}
 	flash_a();
 })();
-	(function(){
+
+//bgm模块
+(function(){
 	//var bgm_list=[];
 	var timeout=null;//播放失败用来切歌的定时器
 	var bgm_list=[
@@ -101,12 +103,6 @@ var is_bgm_played=false;
 	var s=$('#bgm_s');
 	//进度条
 	var bgm_jd=$('#bgm_jd');//进度滑块
-	/*bgm_jd.draggable="true";
-	bgm_jd.ondragstart=function(ev){
-		//controls.log(ev);
-		this.style.left=(parseInt(this.style.left)||0)+ev.x+"px";
-		//bgm_player_obj.currentTime=
-	}*/
 	bgm_jd.onmousedown=function(ev){
 		this.moving=ev.clientX;
 	}
@@ -126,18 +122,20 @@ var is_bgm_played=false;
 	bgm_jd.parentNode.onclick=function(ev){//调整进度
 		if(bgm_player_obj.src&&ev.target==this){
 			//bgm_jd.style.left=ev.x+"px";
-			bgm_player_obj.currentTime=ev.x/parseInt(this.offsetWidth)*bgm_player_obj.duration;
+			bgm_player_obj.currentTime=ev.layerX/parseInt(this.offsetWidth)*bgm_player_obj.duration;
 		}
 	}
 	//音量
 	var bgm_yl=$('#bgm_yl');
 	bgm_yl.parentNode.onclick=function(ev){
-		if(ev.x<0||ev.x>parseInt(this.offsetWidth)){
-			return;
+		if(ev.bk_send||ev.target==this){
+			if(ev.layerX<0||ev.layerX>parseInt(this.offsetWidth)){
+				return;
+			}
+			bgm_yl.style.left=ev.layerX+'px';
+			var new_yl=ev.layerX/this.offsetWidth-0.05;
+			bgm_player_obj.volume=new_yl>0?new_yl:0;
 		}
-		bgm_yl.style.left=ev.x+'px';
-		var new_yl=ev.x/this.offsetWidth-0.05;
-		bgm_player_obj.volume=new_yl>0?new_yl:0;
 	}
 	bgm_yl.onmousedown=function(ev){
 		this.moving=ev.clientX;
@@ -152,7 +150,7 @@ var is_bgm_played=false;
 			/**/
 			//bgm_player_obj.currentTime=this.left*0.01*bgm_player_obj.duration;
 			//this.style.left=this.left+"px";
-			bgm_yl.parentNode.onclick({x:left})
+			bgm_yl.parentNode.onclick({bk_send:true,layerX:left})
 			this.moving=ev.clientX;
 		}
 	}
@@ -224,42 +222,7 @@ var is_bgm_played=false;
 		bgm_jd.moving||(bgm_jd.style.left=this.currentTime/this.duration*100+'%');
 	}
 	bgm_player_obj.volume=0.5;//设置音量
-	//play_next();
-	/*var bgm=$.set('audio',$('#bgm'));
-	var now_bgm_name=$.set('span',$('#bgm'));
-	bgm.controls=true;
-	bgm.style.height='25px';
-	bgm_list=(function(){
-		var now_bgm=-1;
-		var bgm_list=[
-			{name:'天宫之城',src:'/bgm1.mp3'},
-			{name:'童年',src:'/bgm2.mp3'},
-		]
-		return {
-			paly_next:function(){
-				if(++now_bgm==bgm_list.length){
-					now_bgm=0
-				}else if(!bgm_list.length){
-					alert('没有背景音乐');
-					return;
-				}
-				bgm.src=bgm_list[now_bgm].src;
-				now_bgm_name.innerHTML="正在播放："+bgm_list[now_bgm].name;
-				bgm.play();
-			},
-			get_now:function (){
-				return bgm_list[now_bgm].name;
-			}
-		}
-	})();
-	bgm_list.paly_next();
-	bgm.onended=bgm_list.paly_next;
-	bgm.onpause=function(){
-		now_bgm_name.innerHTML="已暂停："+bgm_list.get_now();
-	}
-	bgm.onplaying=function(){
-		now_bgm_name.innerHTML="正在播放："+bgm_list.get_now();
-	}*/
+	s.innerHTML="bgm player loaded / 背景音乐播放器加载完成";
 })();
 </script>
 <?php $this->succ->show_script();?>
