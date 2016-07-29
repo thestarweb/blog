@@ -15,7 +15,10 @@ class admin_server{
 			$res=$this->system->db()->do_SQL('SELECT `page`.`id`,`page`.`title`,`page`.`is_menu`,`page`.`src` FROM `'.self::page_table.'` AS `page` JOIN `'.self::admin_table.'` AS `admin` ON `page`.`id`=`admin`.`pid` WHERE `page`.`pid`='.$id.' AND `admin`.`uid`='.$uid);
 		}
 		foreach($res as &$v){
-			if(!$v['src'])$v['src']=URLROOT.'myadmin/view?id='.$v['id'];
+			if(!$v['src']){
+				$uroot=($_SERVER['SERVER_PROTOCOL']=='HTTP/1.1'?'http://':'https://').$_SERVER['SERVER_NAME'].URLROOT.'myadmin/view?id=';
+				$v['src']=$uroot.$v['id'];
+			}
 		}
 		return $res;
 	}

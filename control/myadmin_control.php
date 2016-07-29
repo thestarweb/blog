@@ -9,9 +9,11 @@ class myadmin_control{
 			$this->admin=new admin_server($system);
 			//$this->admin->flash(1);exit;
 			if(!$this->type=$this->admin->can_visit($this->uid,isset($_GET['id'])?$_GET['id']:0)){
-				echo '你没有权限。如果你本来已经有了权限的，请刷新下裂地权限';
+				echo '你没有权限。如果你本来已经有了权限的，请刷新下权限';
 				exit();
 			}
+			//允许全局后台跨域请求
+			header('Access-Control-Allow-Origin: *');
 		}else{
 			require $system->get_view('admin/login',false);
 			exit;
@@ -24,7 +26,7 @@ class myadmin_control{
 		require $system->get_view('admin/index',false);
 	}
 	public function list_page($system){
-			$system->show_json(array('list'=>$this->admin->get_list($_GET['id'],$this->uid)));
+		$system->show_json(array('list'=>$this->admin->get_list($_GET['id'],$this->uid)));
 	}
 	public function view_page($system){
 		//var_dump($this);
