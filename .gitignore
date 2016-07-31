@@ -1,4 +1,5 @@
 cfg.ini
+*.mp3
+*.cache
 *.temp
 error.log
-*.mp3
