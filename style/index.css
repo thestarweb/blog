@@ -23,3 +23,6 @@
 .content p:before{
 	content:'　　';
 }
+.content{
+	max-height: 500px;
+}
