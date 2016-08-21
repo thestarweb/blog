@@ -8,6 +8,7 @@
 	</form>
 </div>
 <script>
+(function(){
 	var tag_a=$('a');
 	var adminroot=window.location.href.substring(0,window.location.href.lastIndexOf("/")+1);
 	if(tag_a)for(var i in tag_a){
@@ -18,12 +19,27 @@
 			}
 		}
 	}
+	var tag_form=$('form'),temp_input;
+	if(tag_form)for(var i=0;i<tag_form.length-2;i++){
+		if(tag_form[i].action&&tag_form[i].action.indexOf(adminroot)===0){
+			temp_input=$('input',tag_form[i]);
+			for(var j=0;j<temp_input.length-1;j++){
+				if(temp_input[j].name=="key") break;
+			}
+			var login_key=$.set("input",tag_form[i]);
+			login_key.style.display="none";
+			login_key.type="text";
+			login_key.name="key";
+			login_key.value="<?php echo $_POST['key'];?>";
+		}
+	}
 	function go(url,iframename){
 		$("#key").value="<?php echo $_POST['key'];?>";
 		$('#goto').action=url;
 		$("#goto").target=iframename?iframename:'';
 		$("#goto").submit();
 	}
+})();
 </script>
 </body>
 </html>
