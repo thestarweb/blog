@@ -33,13 +33,13 @@
 			login_key.value="<?php echo $_POST['key'];?>";
 		}
 	}
+})();
 	function go(url,iframename){
 		$("#key").value="<?php echo $_POST['key'];?>";
 		$('#goto').action=url;
 		$("#goto").target=iframename?iframename:'';
 		$("#goto").submit();
 	}
-})();
 </script>
 </body>
 </html>

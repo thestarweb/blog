@@ -31,8 +31,8 @@ class essay_server{
 		return ceil($res[0]['nu']/$limit);
 	}
 	public function add($title,$content,$sender,$display=1,$keywords=''){
-		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
-		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
+		$title=htmlentities($title,ENT_HTML5,'utf-8');
+		$content=htmlentities($content,ENT_HTML5,'utf-8');
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`,`keywords`) VALUE(?,?,?,?,?,?)',array($title,time(),$content,$sender,$display,$keywords));
 	}
 	public function add_push($eid,$type){
@@ -40,8 +40,8 @@ class essay_server{
 		$this->system->db()->do_SQL('INSERT INTO `'.self::push_table.'`(`type`,`essay`) VALUE('.$type.','.$eid.')');
 	}
 	public function in($title,$content,$uid,$time,$display,$hot){
-		$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
-		$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
+		//$title=htmlentities($title,ENT_NOQUOTES,'utf-8');
+		//$content=htmlentities($content,ENT_NOQUOTES,'utf-8');
 		$this->system->db()->u_do_SQL('INSERT INTO `'.self::table.'`(`title`,`time`,`content`,`sender`,`display`) VALUE(?,?,?,?,?)',array($title,$time,$content,$uid,$display));
 	}
 	public function update($id,$title,$content,$keywords){

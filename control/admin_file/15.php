@@ -20,8 +20,8 @@
 				if(!$essays) break;
 				foreach($essays as $essay){
 					$xt->add('/essays',0,'essay');
-					$xt->add('/essays/essay',$oid,'title',html_entity_decode($essay['title'],ENT_NOQUOTES));
-					$xt->add('/essays/essay',$oid,'content',html_entity_decode($essay['content'],ENT_NOQUOTES));
+					$xt->add('/essays/essay',$oid,'title',$essay['title']);
+					$xt->add('/essays/essay',$oid,'content',$essay['content']);
 					$xt->add('/essays/essay',$oid,'time',$essay['time']);
 					$xt->add('/essays/essay',$oid,'sender',$essay['sender']);
 					$xt->add('/essays/essay',$oid,'display',$essay['display']);
@@ -40,7 +40,7 @@
 			ob_clean();
 			echo file_get_contents('./out.download.temp.xml');
 			unlink('./out.download.temp.xml');
-			break;
+			die();
 		case 'in':
 			switch (isset($_POST['type'])?$_POST['type']:'') {
 				case 'clean':
