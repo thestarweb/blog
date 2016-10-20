@@ -96,12 +96,21 @@ var is_bgm_played=false;
 	//var bgm_list=[];
 	var timeout=null;//播放失败用来切歌的定时器
 	var bgm_list=[];//音乐列表
+	var player_state=0;
+	var isload=function(){
+		if(player_state&3==3){
+			s.innerHTML="bgm player loaded / 背景音乐播放器加载完成";
+		}
+	}
 	var ajax=$.ajax();
 	ajax.page="<?php echo URLROOT?>bgm_list.json";
-	ajax.keep=true;
 	ajax.type='GET';
 	ajax.callback=function(ajax){
-		if(ajax.json)bgm_list=ajax.json;
+		if(ajax.json){
+			bgm_list=ajax.json;
+			player_state|=2;
+			isload();
+		}
 	}
 	ajax.send();
 	var bgm_now=-1;
@@ -234,7 +243,7 @@ var is_bgm_played=false;
 		}
 	},1000)
 	bgm_player_obj.volume=0.5;//设置音量
-	s.innerHTML="bgm player loaded / 背景音乐播放器加载完成";
+	player_state|=1;
 })();
 </script>
 <?php $this->succ->show_script();?>
