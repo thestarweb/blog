@@ -188,6 +188,7 @@ var is_bgm_played=false;
 	bgm_player_obj.controls=false;//因为各个浏览器界面不统一，我们不能用这个界面
 
 	var play=function(){//播放的方法
+	if（player_state&3!=3)return;
 		if(!bgm_player_obj.src){
 			play_next();
 			return;
@@ -198,6 +199,7 @@ var is_bgm_played=false;
 		button[1].children[1].style.display='';
 	};
 	var stop=function(){
+	if（player_state&3!=3)return;
 		bgm_player_obj.pause();
 		s.innerHTML="已经暂停："+bgm_list[bgm_now].name;
 		button[1].children[1].style.display='none';
@@ -205,6 +207,7 @@ var is_bgm_played=false;
 	}
 
 	var play_next=function(){
+	if（player_state&3!=3)return;
 		if(++bgm_now==bgm_list.length){
 			bgm_now=0;
 		}else if(!bgm_list.length){
@@ -216,6 +219,7 @@ var is_bgm_played=false;
 		bgm_player_obj.src=bgm_list[bgm_now].src;
 	};
 	var play_last=function(){
+	if（player_state&3!=3)return;
 		if(--bgm_now<0){
 			bgm_now=bgm_list.length-1;
 		}else if(!bgm_list.length){
