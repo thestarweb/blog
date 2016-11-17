@@ -1,8 +1,12 @@
+<?php
+$dh_list=$this->load_plugin_php('dh_init',array(
+array('首页',URLROOT),
+array('文章列表',URLROOT.'essay/list/1'),
+array('分类列表',URLROOT.'type/list/1')
+));
+?>
 <br/><br/>
 <div id="dh">
-	<a href="<?php echo URLROOT;?>">首页</a>
-	<a href="<?php echo URLROOT;?>essay/list/1">文章列表</a>
-	<a href="<?php echo URLROOT;?>type/list/1">分类列表</a>
-	<a href="<?php echo URLROOT;?>index/about">关于</a>
-	<?php $this->load_plugin_html('dh');?>
+	<?php foreach($dh_list as $v){ ?>
+	<a href="<?php echo $v[1];?>"><?php echo $v[0];?></a>	<?php } ?>
 </div>
