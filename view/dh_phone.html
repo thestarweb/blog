@@ -1,0 +1,42 @@
+<?php
+$dh_list=$this->load_plugin_php('dh_init',array(
+array('首页',URLROOT),
+array('文章列表',URLROOT.'essay/list/1'),
+array('分类列表',URLROOT.'type/list/1')
+));
+?>
+<div id="dh"><div>
+	<?php foreach($dh_list as $v){ ?>
+	<a href="<?php echo $v[1];?>"><?php echo $v[0];?></a>	<?php } ?>
+	</div>
+</div>
+<script>
+	(function(){
+		var dom=$("#dh"),down=false,time=false,h=0;
+		$("#h").onclick=function(){
+			down=!down;//alert(dom.firstChild);
+			if(!time) to();
+		}
+		var to=function(){
+			time=true;
+			if(down){
+				h+=5;
+				if(h>dom.firstChild.offsetHeight){
+					h=dom.firstChild.offsetHeight;
+					time=false;
+				}else{
+					setTimeout(to,2);
+				}
+			}else{
+				h-=5;
+				if(h<0){
+					h=0;
+					time=false;
+				}else{
+					setTimeout(to,2);
+				}
+			}
+			dom.style.height=h+"px";
+		}
+	})();
+</script>

@@ -16,7 +16,8 @@ a,a:active,a:hover,a:visited{
 	background:rgba(255,255,255,0.7);
 	padding:5px;
 }
-#h,#h a{
+#h{
+	padding:4px 5px;
 	background:#000;
 	color:#FFF;
 	font-size:20px
@@ -25,6 +26,19 @@ a,a:active,a:hover,a:visited{
 	text-align:center;
 	border:2px outset #08F;
 	padding:2px;margin:2px;
+}
+#dh{
+	overflow:hidden;
+	background:rgba(0,0,0,0.1);
+	height:0px;
+	box-shadow:0 0 10px 4px rgba(0,0,0,0.5) inset;
+	/*border: 1px groove #444;*/
+}
+#dh a{
+	display:block;
+	padding:5px 9px;
+	border:1px groove rgba(0,0,0,0.5);
+	box-shadow:0 0 10px 4px rgba(0,0,0,0.5) inset;
 }
 #important_tell{
 	margin:11px 2px;
