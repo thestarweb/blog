@@ -8,5 +8,5 @@ array('分类列表',URLROOT.'type/list/1')
 <br/><br/>
 <div id="dh">
 	<?php foreach($dh_list as $v){ ?>
-	<a href="<?php echo $v[1];?>"><?php echo $v[0];?></a>	<?php } ?>
+	<a href="<?php echo $v[1];?>" <?php if(isset($v[2])) echo'target="_blank"';?>><?php echo $v[0];?></a>	<?php } ?>
 </div>
