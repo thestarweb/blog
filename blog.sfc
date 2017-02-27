@@ -5,10 +5,10 @@ if(!defined('system::VISION')||system::VISION<3){
 	die('核心框架system版本过低');
 }
 //版本及版权信息
-			define('VERSION','1.2.0.0191');
-			define('MAKE_TIME','2016-11-22');
-			define('VERSION_INFO',VERSION.' (alpha)&nbsp;'.MAKE_TIME);
-			define('COPY','星星站点博客&copy;2013-2016 星星站点 保留所有权利');
+			define('VERSION','1.2.0.0194');
+			define('MAKE_TIME','2017-02-27');
+			define('VERSION_INFO',VERSION.' &nbsp;'.MAKE_TIME);
+			define('COPY','星星站点博客&copy;2013-2017 星星站点 保留所有权利');
 			$this->cfgs['succ_dir']='../succ/';
 			$this->cfgs['succ_app_id']='1';
 			$this->cfgs['succ_app_key']='';
