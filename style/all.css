@@ -86,7 +86,7 @@ footer{
 	text-align:center;
 	margin: 29px;
 	color: #08F;
-	text-shadow:1px 0px 4px #E6E8FA, 0px 1px 4px #E6E8FA, 0px -1px 4px #E6E8FA, -1px 0px 4px #E6E8FA;
+	text-shadow:1px 0px 1px #E6E8FA, 0px 1px 1px #E6E8FA, 0px -1px 1px #E6E8FA, -1px 0px 1px #E6E8FA;
 }
 a,a:active,a:hover,a:visited{
 	color:#000;
