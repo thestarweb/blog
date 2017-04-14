@@ -1,0 +1,9 @@
+	<div id="list" class="block">
+		<div>分类</div>
+		<ul>
+<?php foreach($list as $v) {?>
+			<a href="<?php echo URLROOT,'type/id/',$v['id'];?>"><li><?php echo $v['name'];?></li></a>
+<?php } ?>
+		</ul>
+</div>
+<div class="fanye"><?php echo $ye;?></div>
