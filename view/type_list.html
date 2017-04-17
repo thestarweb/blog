@@ -14,6 +14,7 @@
 <div class="left">
 	<div class="left_div">
 		<div class="h">分类列表</div>
+<?php if($list){ ?>
 		<div id="list">
 			<div>标题</div>
 			<ul>
@@ -26,6 +27,9 @@
 	<div class="left_div">
 		<div class="h">翻页</div>
 		<div class="fanye"><?php echo $ye;?></div>
+<?php }else{ ?>
+		<div>管理员没有设置任何的分类</div>
+<?php }?>
 	</div>
 </div>
 <?php require $system->get_view('others');?>

@@ -1,9 +1,14 @@
 	<div id="list" class="block">
 		<div>分类</div>
+<?php if($list){ ?>
 		<ul>
 <?php foreach($list as $v) {?>
 			<a href="<?php echo URLROOT,'type/id/',$v['id'];?>"><li><?php echo $v['name'];?></li></a>
 <?php } ?>
 		</ul>
-</div>
-<div class="fanye"><?php echo $ye;?></div>
+	</div>
+	<div class="fanye"><?php echo $ye;?></div>
+<?php }else{ ?>
+		管理员没有设置任何的分类
+	</div>
+<?php } ?>

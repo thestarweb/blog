@@ -59,12 +59,14 @@ class type_control{
 			exit;
 		}
 		$type=new type_server($system);
-		$fenye=new fenye_tool($type->how_many(),$page,URLROOT.'type/list/',10);
+		$fenye=new fenye_tool(0,$page,URLROOT.'type/list/',10);
+		$system->show_head('分类——星星站点博客');
 		if($ye=$fenye->get()){
 			$list=$type->get_list(10,$page);
-			$system->show_head('分类——星星站点博客');
-			include $system->get_view('type_list');
-			$system->show_foot();
+		}else{
+			$list=[];
 		}
+		include $system->get_view('type_list');
+		$system->show_foot();
 	}
 }
