@@ -1,10 +1,2 @@
-
-		<div id="list" class="block">
-			<div>标题<span>发布时间</span></div>
-			<ul>
-	<?php foreach ($list as $v) {?>
-				<a href="<?php echo URLROOT,'essay/',$v['id'];?>"><li><?php echo $v['title'];?><span><?php echo date('Y-m-d',$v['time']);?></span></li></a>
-	<?php } ?>
-			</ul>
-		</div>
+		<?php require $system->get_view('public/list',false);?>
 		<div class="fanye"><?php echo $ye;?></div>
