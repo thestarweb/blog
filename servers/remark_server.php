@@ -35,6 +35,6 @@ class remark_server{
 	*/
 	public function get_all($page=1,$limit=10){
 		$limit+=0;
-		return $this->system->db()->exec('SELECT `uid`,`time`,`content` FROM `'.self::table.'` ORDER BY `time` DESC LIMIT '.($page-1)*$limit.','.$limit);
+		return $this->system->db()->exec('SELECT `r`.`eid`,`r`.`uid`,`r`.`time`,`r`.`content`,`e`.`title` FROM `'.self::table.'` AS `r` JOIN `'.essay_server::table.'` AS `e` ON `r`.`eid`=`e`.`id` ORDER BY `time` DESC LIMIT '.($page-1)*$limit.','.$limit);
 	}
 }
