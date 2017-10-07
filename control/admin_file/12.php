@@ -18,11 +18,13 @@ if(isset($_GET['getid'])){
 		$add_type=explode(',',$_POST['add_type']);
 		var_dump($add_type);
 		foreach ($add_type as $v) {
+			if(!$v) continue;
 			if($v)$type->set_essay_type($eid,(int)$v);
 		}
 		$remove_type=explode(',',$_POST['remove_type']);
 		var_dump($remove_type);
 		foreach ($remove_type as $v) {
+			if(!$v) continue;
 			if($v)$type->remove_essay_type($eid,(int)$v);
 		}
 		echo 1;
