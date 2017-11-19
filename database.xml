@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db>
+	<table name="admin_pages">
+		<structure name="id" type="smallint(5)" attributes="unsigned" auto_increment="true"/>
+		<structure name="pid" type="smallint(5)" attributes="unsigned"/>
+		<structure name="title" type="varchar(10)"/>
+		<structure name="is_menu" type="tinyint(1)"/>
+		<structure name="src" type="varchar(200)" null="true"/>
+		<index name="PRIMARY" type="PRIMARY">id</index>
+	</table>
+	<table name="admins">
+		<structure name="id" type="mediumint(8)" attributes="unsigned" auto_increment="true"/>
+		<structure name="uid" type="mediumint(8)" attributes="unsigned"/>
+		<structure name="pid" type="tinyint(3)" attributes="unsigned"/>
+		<structure name="type" type="tinyint(3)" attributes="unsigned" default="1"/>
+		<index name="PRIMARY" type="PRIMARY">id</index>
+	</table>
+	<table name="essay">
+		<structure name="id" type="int(10)" attributes="unsigned" auto_increment="true"/>
+		<structure name="title" type="varchar(20)"/>
+		<structure name="content" type="mediumtext"/>
+		<structure name="time" type="int(10)" attributes="unsigned"/>
+		<structure name="sender" type="mediumint(8)" attributes="unsigned"/>
+		<structure name="display" type="tinyint(4)" default="1"/>
+		<structure name="hot" type="int(11)" default="1"/>
+		<structure name="keywords" type="varchar(100)" default=""/>
+		<index name="PRIMARY" type="PRIMARY">id</index>
+		<index name="time" type="INDEX">time</index>
+		<index name="hot" type="INDEX">hot</index>
+	</table>
+	<table name="push">
+		<structure name="type" type="tinyint(4)"/>
+		<structure name="essay" type="int(11)"/>
+		<index name="index_name" type="INDEX">type,essay</index>
+	</table>
+	<table name="remark">
+		<structure name="id" type="int(11)" auto_increment="true"/>
+		<structure name="eid" type="int(11)"/>
+		<structure name="uid" type="mediumint(9)"/>
+		<structure name="time" type="int(11)"/>
+		<structure name="content" type="varchar(500)"/>
+		<index name="PRIMARY" type="PRIMARY">id</index>
+		<index name="uid" type="INDEX">uid</index>
+		<index name="main" type="INDEX">eid,time</index>
+		<index name="time" type="INDEX">time</index>
+	</table>
+	<table name="tempessay">
+		<structure name="name" type="varchar(50)"/>
+		<structure name="title" type="varchar(20)"/>
+		<structure name="content" type="mediumtext"/>
+	</table>
+	<table name="type">
+		<structure name="id" type="tinyint(4)" auto_increment="true"/>
+		<structure name="name" type="varchar(20)"/>
+		<structure name="info" type="varchar(1000)" null="true"/>
+		<structure name="pid" type="tinyint(4)" default="0"/>
+		<structure name="ename" type="varchar(20)" null="true"/>
+		<index name="PRIMARY" type="PRIMARY">id</index>
+		<index name="uid" type="INDEX">pid</index>
+		<index name="id" type="INDEX">id,name</index><!--为什么要加这个索引？因为排序根本不用主键索引啊..顺便索引覆盖-->
+		<index name="eid_tid" type="UNIQUE">ename</index>
+	</table>
+	<table name="type_link">
+		<structure name="tid" type="tinyint(4)"/>
+		<structure name="eid" type="int(11)"/>
+		<index name="tid_eid" type="UNIQUE">tid,eid</index>
+		<index name="eid_tid" type="UNIQUE">eid,tid</index>
+	</table>
+</db>

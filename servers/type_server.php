@@ -15,7 +15,7 @@ class type_server{
 	*/
 	public function get_list($limit=5,$page=1){
 		$limit+=0;$page+=0;
-		return $this->system->db()->exec('SELECT `id`,`name` FROM `'.self::table.'` limit '.$limit*($page-1).','.$limit);
+		return $this->system->db()->exec('SELECT `id`,`name` FROM `'.self::table.'` ORDER BY `id` limit '.$limit*($page-1).','.$limit);
 	}
 	/**
 		获取有多少个分类
