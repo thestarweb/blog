@@ -5,8 +5,8 @@ if(!defined('system::VISION')||system::VISION<3){
 	die('核心框架system版本过低');
 }
 //版本及版权信息
-			define('VERSION','1.2.2.0210');
-			define('MAKE_TIME','2018-01-06');
+			define('VERSION','1.2.2.0211');
+			define('MAKE_TIME','2018-01-24');
 			define('VERSION_INFO',VERSION.' &nbsp;'.MAKE_TIME);
 			define('COPY','星星站点博客&copy;2013-2018 星星站点 保留所有权利');
 			$this->cfgs['succ_dir']='../succ/';

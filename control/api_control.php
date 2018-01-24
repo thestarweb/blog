@@ -1,6 +1,7 @@
 <?php
 class api_control{
 	public function hot_essay_page($system){
+		echo '此API已停用';return;
 		$cache=new cache_tool('./hotessay.cache');
 		if($cache->start_page_cache()){
 			//echo '<link rel="stylesheet" href="',$system->ini_get('styles_url'),'all.css">';
