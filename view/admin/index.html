@@ -60,7 +60,8 @@ p{
 
 	<tr id="main">
 		<td><div id="opening"></div></td>
-		<td id="web"></td>
+		<td id="web">
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2">
@@ -73,6 +74,8 @@ p{
 <script src="<?php echo $system->ini_get('my_script_path');?>"></script>
 <?php $system->succ->show_script();?>
 <script type="text/javascript">
+var iframe=$.set('iframe',$('#web'));
+iframe.name='opiframe';
 suc_u_load(function(suc_u_info){
 var menu=<?php echo json_encode($menus);?>;
 //var opening=[];
@@ -99,10 +102,10 @@ function set_menu(arr,dom){
 				var iframe=$.set('iframe',$('#web'));
 				<?php if(isset($postkey)){?>
 				var f=$('#gform');
-				f.target=iframe.name='opiframe';
 				//alert(f.target);
 				$('#postkey').value='<?php echo $postkey;?>';
 				f.action=this.info.src;
+				f.target='opiframe';
 				f.submit();
 				iframe.name='';
 				<?php }else{?>

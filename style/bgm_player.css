@@ -4,7 +4,7 @@
 		bottom: 0;
 		background-color: #000;
 		height: 39px;
-		color: #FFF;
+		color: #AAF;
 		position: fixed;
 		line-height: 25px;
 		font-size: 15px;
@@ -29,7 +29,7 @@
 	#bgm .bgm_center div{
 		margin-top:2px;
 		height:5px;
-		background-color:#FFF;
+		background-color:#AAF;
 		margin-left: 9px;
 	}
 	#bgm .bgm_center span{
@@ -73,7 +73,7 @@
 		height:0;
 		padding:17px;
 		border-radius:50%;
-		border: solid 2px #FFF;
+		border: solid 2px #AAF;
 		/*position:relative;*/
 	}
 	#bgm audio{

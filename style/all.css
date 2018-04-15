@@ -5,6 +5,7 @@
 	padding: 0px;
 	position:relative;
 	list-style-type:none;/*清除li带来的点*/
+	color: #b0bdd0;
 }
 body{
 	background:#88f;
@@ -18,11 +19,13 @@ body{
 	margin: 0 auto;
 }
 #dh{
-	background-color: rgba(200,128,255,0.9);
+	background-color: rgba(7,26,55,0.9);
 	line-height: 29px;
+	text-align: center;
 }
 #dh a{
-	padding:5px;
+	display: inline-block;
+	padding:15px;
 }
 
 #h{
@@ -48,52 +51,61 @@ body{
 	width:800px;
 }
 .h{
-	background:#08f;
-	padding: 5px;
+	/*background:#08f;*/
+	padding: 16px;
+	border-bottom: 1px outset #b0bdd0;
 }
 .h span a{
 	float: right;
 }
 .my_text{
-	background:rgba(255,255,255,0.5);
+	background:rgba(7,26,55,0.9);
 }
 .left{
 	float: left;
-	width:80%;
+	width:79%;
 }
 .left_div{
-	margin-top:4px;
-	background:rgba(255,255,255,0.5);
+	margin-top:16px;
+	background:rgba(7,26,55,0.9);
+	border-radius: 2px;
+	overflow: hidden;
+}
+.left_div img{
+	-webkit-filter: brightness(0.9);
+	filter: brightness(0.9);
 }
 .right_div{
 	width:19%;
 	float:right;
-	margin-top:4px;
-	background:rgba(255,255,255,0.5);
+	margin-top:16px;
+	background:rgba(7,26,55,0.9);
 }
 .right{
 	float:right;
 	width:19%;
 }
 .right_div div{
-	padding: 5px;
+	padding: 16px;
 }
 .right .right_div{
 	width:100%;
 }
 .fanye{
 	text-align:center;
+	line-height: 50px;
 }
 footer #f{
 	text-align:center;
 	margin: 29px;
 	color: #08F;
-	text-shadow:1px 0px 1px #E6E8FA, 0px 1px 1px #E6E8FA, 0px -1px 1px #E6E8FA, -1px 0px 1px #E6E8FA;
+	/*text-shadow:1px 0px 1px #E6E8FA, 0px 1px 1px #E6E8FA, 0px -1px 1px #E6E8FA, -1px 0px 1px #E6E8FA;*/
+	text-shadow:1px 0px 1px #73746F, 0px 1px 1px #73746F, 0px -1px 1px #73746F, -1px 0px 1px #73746F;
 }
 a,a:active,a:hover,a:visited{
-	color:#000;
+	/*color:#000;*/
 	text-decoration: none;
 }
 .type,.type:active,.type:hover,.type:visited{
-	color:#05A;
+	color:#38547b;
 }
