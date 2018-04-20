@@ -4,9 +4,13 @@
 	margin: 0;
 	padding: 0;
 	font-family: '微软雅黑';
+	position: relative;
+	list-style-type:none;
 }
 body{
-	background:#9CE;
+	/*background:#9CE;*/
+	background: linear-gradient(#08F 5%,#9CE  40%);
+	background-attachment:fixed;
 }
 a,a:active,a:hover,a:visited{
 	color:#000;
@@ -17,6 +21,7 @@ a,a:active,a:hover,a:visited{
 	box-shadow:5px 5px 11px 1px #99A;
 	background:rgba(255,255,255,0.7);
 	padding:5px;
+	border-radius: 5px;
 }
 #h{
 	padding:4px 5px;

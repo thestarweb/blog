@@ -1,9 +1,16 @@
 .essay_li{
-	padding:5px;
-	/*border:1px outset #000;*/
-	background:rgba(255,255,255,0.7);
-	margin:11px;
-	box-shadow:5px 5px 11px 1px #99A;
+	max-height: 280px;
+	overflow: hidden;
+	position:relative;
+}
+.essay_li .after{
+	display: block;
+	height: 40px;
+	width: 200%;
+	margin-left: -20px;
+	background: linear-gradient(rgba(255,255,255,0),rgba(255,255,255,1) );;
+	position: absolute;
+	bottom: 0px;
 }
 .content p{
 	line-height: 29px;

@@ -1,13 +1,13 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>index_phone.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo $system->ini_get('styles_url');?>mk.css"/>
 	<div>
-		<div class="h">文章列表<span><a href="<?php echo URLROOT;?>essay_list">更多</a></span></div>
 	<?php if($essay_list) foreach($essay_list as $v){ ?>
 		<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
-		<div class="essay_li mk">
+		<div class="block essay_li mk">
 			<h1 class="title"><?php echo $v['title'];?></h1>
 			<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
 			<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
+			<div class="after"></div>
 		</div>
 		</a>
 	<?php }else{ ?>

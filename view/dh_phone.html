@@ -15,28 +15,43 @@ array('分类列表',URLROOT.'type/list/1')
 		var dom=$("#dh"),down=false,time=false,h=0;
 		$("#h").onclick=function(){
 			down=!down;//alert(dom.firstChild);
-			if(!time) to();
+			to();
 		}
 		var to=function(){
-			time=true;
-			if(down){
-				h+=5;
-				if(h>dom.firstChild.offsetHeight){
-					h=dom.firstChild.offsetHeight;
-					time=false;
+			if(time) return;
+			var fun=function(){
+				document.body.scrollTop=0;
+				time=true;
+				if(down){
+					h+=5;
+					if(h>dom.firstChild.offsetHeight){
+						dom.style.height=(h=dom.firstChild.offsetHeight)+"px";
+						time=false;
+						return;
+					}
 				}else{
-					setTimeout(to,2);
+					h-=5;
+					if(h<0){
+						dom.style.height=h=0;
+						time=false;
+						return;
+					}
 				}
-			}else{
-				h-=5;
-				if(h<0){
-					h=0;
-					time=false;
-				}else{
-					setTimeout(to,2);
-				}
+				dom.style.height=h+"px";
+				requestAnimationFrame(fun);
 			}
-			dom.style.height=h+"px";
+			fun()
 		}
+		document.addEventListener("mousewheel", function(event) {
+			if(event.deltaY<0&&document.body.scrollTop==0){
+				down=true;
+				to();
+			}else if(down){
+				document.body.scrollTop=0;
+				down=false;
+				to();
+				return false;
+			}
+		});
 	})();
 </script>
