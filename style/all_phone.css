@@ -12,10 +12,6 @@ body{
 	background: linear-gradient(#08F 5%,#9CE  40%);
 	background-attachment:fixed;
 }
-html, body{
-	margin:0;
-	height:100%;
-}
 a,a:active,a:hover,a:visited{
 	color:#000;
 	text-decoration: none;
@@ -26,6 +22,7 @@ a,a:active,a:hover,a:visited{
 	background:rgba(255,255,255,0.7);
 	padding:5px;
 	border-radius: 5px;
+	overflow: hidden;
 }
 #h{
 	padding:4px 5px;
@@ -61,11 +58,13 @@ a,a:active,a:hover,a:visited{
 }
 #list div{
 	border-bottom: solid 1.5px #000;
-	background:#08F;
+	background:linear-gradient(160deg,#88F,#9CE );
+	padding: 5px 10px;
 }
 #list li{
 	overflow: hidden;
 	border-bottom: solid 1px #555; 
+	padding: 2px 10px;
 }
 #list span{
 	float: right;
