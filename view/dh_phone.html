@@ -40,7 +40,7 @@ array('分类列表',URLROOT.'type/list/1')
 				dom.style.height=h+"px";
 				requestAnimationFrame(fun);
 			}
-			fun()
+			fun();
 		}
 		document.addEventListener("mousewheel", function(event) {
 			if(event.deltaY<0&&document.body.scrollTop==0){
@@ -53,5 +53,37 @@ array('分类列表',URLROOT.'type/list/1')
 				return false;
 			}
 		});
+		
+			var tempY=false,tempY2;
+				document.addEventListener("touchstart", function(event) {
+		if(document.body.scrollTop!=0)return;
+			tempY2=tempY=event.touches[0].clientY;
+		});
+		document.addEventListener("touchmove",function(event){
+			tempY2=event.touches[0].clientY;
+			if(down){
+				document.body.scrollTop=0;
+				event.preventDefault();
+				return false;
+			}
+	});
+		document.addEventListener("touchend", function(event) {
+			if(!tempY) return;
+			if(down){
+				document.body.scrollTop=0;
+				if(tempY2-tempY<-50){
+					down=false;
+					to();
+				}
+			}else{
+				if(tempY2-tempY>50){
+					down=true;
+					to();
+				}
+			}
+			tempY=false;
+		});
 	})();
+	
+
 </script>

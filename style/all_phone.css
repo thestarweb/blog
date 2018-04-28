@@ -12,6 +12,10 @@ body{
 	background: linear-gradient(#08F 5%,#9CE  40%);
 	background-attachment:fixed;
 }
+html, body{
+	margin:0;
+	height:100%;
+}
 a,a:active,a:hover,a:visited{
 	color:#000;
 	text-decoration: none;
