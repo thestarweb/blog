@@ -85,8 +85,8 @@ body{
 	float:right;
 	width:19%;
 }
-.right_div div{
-	padding: 16px;
+.left_div .block_data,.right_div div{
+	padding: 11px 16px;
 }
 .right .right_div{
 	width:100%;

@@ -1,32 +1,18 @@
-<style>
-	#list{
-		padding: 5px;
-		line-height: 25px;
-	}
-	#list div{
-		border-bottom: solid 1.5px #000;
-	}
-	#list li{
-		overflow: hidden;
-		border-bottom: solid 1px #555; 
-	}
-	#list span{
-		float: right;
-		width: 90px;
-	}
-</style>
+<link rel="stylesheet" href="<?php echo $system->ini_get('styles_url');?>list.css">
 <div class="left">
 <?php if($type_info['info']) {?>
 	<div class="left_div">
 		<div class="h">分类 <?php echo $type_info['name'];?> 的说明</div>
 		<div>
-			<?php echo $type_info['info'];?>
+			<div class="block_data">
+				<?php echo $type_info['info'];?>
+			</div>
 		</div>
 	</div>
 <?php }?>
 <div class="left_div">
 		<div class="h">子分类</div>
-		<div>
+		<div class="block_data">
 <?php foreach($ctypes as $v){?>
 			<a href="<?php echo URLROOT,'type/id/',$v['id'];?>/1" ><?php echo $v['name'];?></a>
 <?php } ?>

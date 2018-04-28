@@ -1,0 +1,17 @@
+#list{
+	padding: 5px;
+	line-height: 25px;
+}
+#list div{
+	border-bottom: solid 1.5px #777;
+	padding: 8px 10px;
+}
+#list li{
+	overflow: hidden;
+	border-bottom: solid 1px #555; 
+	padding: 4px 10px;
+}
+#list span{
+	float: right;
+	width: 90px;
+}
