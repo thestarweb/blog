@@ -3,9 +3,6 @@
 	padding:11px;
 	border:1px outset #000;
 }
-.essay_li div{
-	overflow:hidden;
-}
 .essay_li .title{
 	font-size:30px;
 	text-align: center;
@@ -23,6 +20,16 @@
 .content p:before{
 	content:'　　';
 }
-.content{
-	max-height: 500px;
+.essay_li{
+	max-height: 450px;
+	overflow: hidden;
+}
+.essay_li .after{
+	display: block;
+	height: 80px;
+	width: 200%;
+	margin-left: -20px;
+	background: linear-gradient(rgba(7,26,55,0),rgba(7,26,55,1));
+	position: absolute;
+	bottom: 0px;
 }
