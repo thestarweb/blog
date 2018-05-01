@@ -48,14 +48,14 @@
 					get_page(this.href);
 					document.title='正在加载——星星站点博客';
 					return false;
-				}return false;
+				}
 			});
 		};
 		var run_div_script=function(){
 			var script=$('#main').innerHTML.match(/<script>(.|\n|\r)+<\/script>/gi);
 			for(var i in script){
 				try{
-				eval(script[i].replace('<script>','').replace('<\/script>',''));
+					eval(script[i].replace('<script>','').replace('<\/script>',''));
 				} catch (e){
 					alert(e);
 				}
