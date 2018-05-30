@@ -1,0 +1,122 @@
+<style>
+
+	#root{
+		margin-right: 40px;
+	}
+	#root div{
+		margin: 0px;
+		margin-left: 40px;
+		border: 1px outset #b0bdd0;
+		padding: 0px ;
+	}
+	#root span{
+		float: right;
+		margin-right: 50px;
+	}
+	#root p{
+		margin: 0;
+		padding: 5px;
+	}
+</style>
+
+<h2>当前操作的管理员id:<?php echo $_GET['uid'];?></h2><a href=""></a>
+
+<div id="root">
+	
+</div>
+<input type="button" value="确认修改" onclick="submit()"/>
+<script>
+	
+	var init=false;
+	var add_array=[],del_array=[];
+	function submit(){
+		if(!init) return;
+		post_here("add="+add_array.toString()+"&del="+del_array.toString(),function(ajax){
+			if(ajax.json&&ajax.json.error==0){
+				alert("更新成功");
+				init=true;
+			}else{
+				alert(ajax.text);
+			}
+		});
+		init=false;
+		add_array=[];
+		del_array=[];
+	}
+	var _list=<?php echo json_encode($pages);?>;
+	change=function(checked,id){
+		if(!init) return true;
+		if(checked){
+			if(!myScript.remove_from_array(del_array,id)) add_array.push(id);
+		}else{
+			if(!myScript.remove_from_array(add_array,id)) del_array.push(id);
+		}
+	}
+	setchildren=function(id,bool){
+		for(var i in list){
+			if(list[i].pid==id){
+				list[i].box.checked=bool;
+				list[i].box.onchange(bool,list[i].id);
+				setchildren(i,bool);
+			}
+		}
+	}
+
+	var rank=<?php echo json_encode($rank);?>;
+	var list=[];
+	for(var i in _list){
+		list[_list[i].id]=_list[i];
+	}
+	var maindiv=$("#root");
+	for(var i in list){
+		if(!list[i].div)
+			list[i].div=document.createElement("div");
+		var p=document.createElement("p");
+		p.innerHTML=list[i].title+"<span><input type=\"checkbox\" onchange=\"change(this.checked,"+list[i].id+" )\" id=\""	+list[i].id+"\"/></span>";
+		list[i].box=myScript.$get("input",p)[0];
+		list[i].box.onclick=function (){
+			if(init&&confirm(this.checked?"确认要赋予此权限（及其子权限）？":"确认要移除此权限（及其子权限）？")){
+				var temp=list[this.getAttribute("id")].pid;
+				if(this.checked){
+					while(temp!=0&&list[temp].box.checked!=this.checked){
+						list[temp].box.checked=this.checked;
+						list[temp].box.onchange(this.checked,list[temp].id);
+						temp=list[temp].pid;
+					}
+				}
+				setchildren(this.getAttribute("id"),this.checked);
+				return true;
+			}else{
+				return false;
+			}
+		}
+		if(list[i].div.children.length){
+			list[i].div.insertBefore(p,list[i].div.children[0]);
+		}else{
+			list[i].div.appendChild(p);
+		}
+		if(list[i].pid==0){
+			maindiv.appendChild(list[i].div);
+		}else{
+			if(!list[list[i].pid].div) list[list[i].pid].div=document.createElement("div");
+			list[list[i].pid].div.appendChild(list[i].div);
+		}
+	}
+
+	var t=$("p")
+	for(var i=0;i<t.length;i++){
+		if(i%2){
+			t[i].style.background="#ccc";
+		}
+	}
+	//勾选
+	for(var i=0;i<rank.length;i++){
+		if(rank[i].pid==0) continue;
+		try{
+			list[rank[i].pid].box.checked=true;
+		}catch(e){
+			alert(rank[i].pid);
+		}
+	}
+	init=true;
+</script>

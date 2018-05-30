@@ -49,7 +49,7 @@ class admin_server{
 	public function can_visit($uid,$id){
 		if($uid===false) return false;
 		$uid+=0;$id+=0;
-		if($uid==0){
+		if($uid===0){
 			if($id==0)return 1;
 			$res=$this->system->db()->exec('SELECT `is_menu` FROM `'.self::page_table.'` AS `p` WHERE `id`='.$id);
 			if($res){
@@ -116,11 +116,63 @@ class admin_server{
 		}
 	}
 	/**
+		返回所有存在于管理员表中的uid
+		return array
+	*/
+	public function admin_list(){
+		return $this->system->db()->exec('SELECT distinct `uid` FROM `'.self::admin_table.'`');
+	}
+	/**
+		获取所有的管理页面
+		return array
+	*/
+	public function get_all_page(){
+		return $this->system->db()->exec('SELECT `id`,`pid`,`title` FROM `'.self::page_table.'`');
+	}
+	/**
+		获取一个管理员能访问的节点
+		@uid int 管理员uid
+		return array
+	*/
+	public function get_admin_rank($uid){
+		$uid+=0;
+		return $this->system->db()->exec('SELECT `pid` FROM `'.self::admin_table.'` WHERE `uid`='.$uid);
+	}
+	/**
 		用于增加一个管理员（用户）可访问的节点
-		暂时还没做好
+		@uid int 管理员id
+		@pid int/int array 管理页面
+		return null
 	*/
 	public function add($uid,$pid,$type=1){
-		$uid+=0;$pid+=0;$type+=0;
-		//$this->system->db()->exec('INSERT INTO `'.$this->admin_page.'`(`uid`,`pid`,`type`) VALUE(logologo
+		$uid+=0;$type+=0;
+		$sth=$this->system->db()->prepare('INSERT INTO `'.self::admin_table.'`(`uid`,`pid`,`type`) VALUE(?,?,?)');
+		if(is_array($pid)){
+			foreach ($pid as $key => $value) {
+				$value+=0;
+				$sth->execute([$uid,$value,$type]);
+			}
+		}else{
+			$sth->execute([$uid,$pid,type]);
+		}
+	}
+
+	/**
+		用于移除一个管理员（用户）可访问的节点
+		@uid int 管理员id
+		@pid int/int array 管理页面
+		return null
+	*/
+	public function remove($uid,$pid){
+		$uid+=0;
+		$sth=$this->system->db()->prepare('DELETE FROM `'.self::admin_table.'` WHERE `uid`=? AND `pid`=?');
+		if(is_array($pid)){
+			foreach ($pid as $key => $value) {
+				$value+=0;
+				$sth->execute([$uid,$value]);
+			}
+		}else{
+			$sth->execute([$uid,$pid]);
+		}
 	}
 }

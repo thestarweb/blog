@@ -40,6 +40,13 @@
 		$("#goto").target=iframename?iframename:'';
 		$("#goto").submit();
 	}
+	function post_here(data,callback){
+		var ajax=$.ajax();
+		ajax.page="#";
+		ajax.callback=callback;
+		ajax.data=data+"&key=<?php echo $_POST['key'];?>";
+		ajax.send();
+	}
 </script>
 </body>
 </html>

@@ -14,6 +14,7 @@
 		<structure name="pid" type="tinyint(3)" attributes="unsigned"/>
 		<structure name="type" type="tinyint(3)" attributes="unsigned" default="1"/>
 		<index name="PRIMARY" type="PRIMARY">id</index>
+		<index name="uid" type="INDEX">uid</index>
 	</table>
 	<table name="essay">
 		<structure name="id" type="int(10)" attributes="unsigned" auto_increment="true"/>

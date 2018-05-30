@@ -1,0 +1,12 @@
+<table>
+	<tr>
+		<th>id</th>
+		<th></th>
+	</tr>
+<?php foreach($list as $v){ ?>
+	<tr>
+		<td><?php echo $v['uid'];?></td>
+		<td><a href="javascript:go(document.location.href+'&uid=<?php echo $v['uid'];?>')">参看/编辑</a></td>
+	</tr>
+<?php } ?>
+<table>
