@@ -6,6 +6,7 @@ if(isset($_POST['title'])&&isset($_POST['content'])&&isset($_POST['add_type'])){
 	$types=explode(',',$_POST['add_type']);
 	$type=new type_server($system);
 	foreach ($types as $v){
+		if($v==="") continue;
 		$v+=0;
 		if($v)$type->set_essay_type($eid,$v);
 	}
