@@ -10,7 +10,7 @@ class install_control{
 		}
 		if(isset($_GET['yes'])){
 			set_time_limit(0);
-			dbhelper_tool::update($system->db(),__DIR__.'/../database.xml');
+			var_dump(dbhelper_tool::update($system->db(),__DIR__.'/../database.xml'));
 			echo '数据库更新已完成';
 			fclose(fopen(__DIR__.'/../update.lock','w'));
 			exit;

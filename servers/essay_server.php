@@ -92,8 +92,8 @@ class essay_server{
 		@keywords string 修改后关键字
 		return void
 	*/
-	public function update($id,$title,$content,$keywords){
-		$this->system->db()->u_exec('UPDATE `'.self::table.'` SET `title`=?,`content`=?,`keywords`=? WHERE `id`=?',array($title,htmlentities($content,ENT_NOQUOTES,'utf-8'),$keywords,$id,));
+	public function update($id,$title,$content,$keywords,$uid){
+		$this->system->db()->u_exec('UPDATE `'.self::table.'` SET `title`=?,`content`=?,`update_time`=?,`update_by`=?,`keywords`=? WHERE `id`=?',array($title,htmlentities($content,ENT_NOQUOTES,'utf-8'),time(),$uid,$keywords,$id));
 	}
 	/**
 		移除推送

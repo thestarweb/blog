@@ -22,6 +22,8 @@
 		<structure name="content" type="mediumtext"/>
 		<structure name="time" type="int(10)" attributes="unsigned"/>
 		<structure name="sender" type="mediumint(8)" attributes="unsigned"/>
+		<structure name="update_time" type="int(10)" attributes="unsigned" default="0"/>
+		<structure name="update_by" type="mediumint(8)" attributes="unsigned" default="0"/>
 		<structure name="display" type="tinyint(4)" default="1"/>
 		<structure name="hot" type="int(11)" default="1"/>
 		<structure name="keywords" type="varchar(100)" default=""/>
