@@ -8,7 +8,9 @@
 			<div id="title"><?php echo $essay['title'];?></div>
 			<br/>
 			<div id="time">发布时间:<?php echo date('Y-m-d H:i:s',$essay['time']);?>　by:<?php echo $system->succ->head_html($essay['sender']);?></div>
-			<div id="time">最后更新时间:<?php echo date('Y-m-d H:i:s',$essay['update_time']);?>　by:<?php echo $system->succ->head_html($essay['update_by']);?></div>
+<?php if($essay['update_time']){ ?>
+			<div id="time_update">最后更新时间:<?php echo date('Y-m-d H:i:s',$essay['update_time']);?>　by:<?php echo $system->succ->head_html($essay['update_by']);?></div>
+<?php } ?>
 			<div id="types">
 <?php foreach($types as $t){?>
 			<a href="<?php echo URLROOT,'type/id/',$t['id'],'/1';?>" class="type"><?php echo $t['name'];?></a>
