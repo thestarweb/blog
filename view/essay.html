@@ -7,7 +7,8 @@
 			<br/>
 			<div id="title"><?php echo $essay['title'];?></div>
 			<br/>
-			<div id="time">发布时间:<?php echo date('Y-m-d H:i:s',$essay['time']);?></div>
+			<div id="time">发布时间:<?php echo date('Y-m-d H:i:s',$essay['time']);?>　by:<?php echo $system->succ->head_html($essay['sender']);?></div>
+			<div id="time">最后更新时间:<?php echo date('Y-m-d H:i:s',$essay['update_time']);?>　by:<?php echo $system->succ->head_html($essay['update_by']);?></div>
 			<div id="types">
 <?php foreach($types as $t){?>
 			<a href="<?php echo URLROOT,'type/id/',$t['id'],'/1';?>" class="type"><?php echo $t['name'];?></a>
@@ -20,11 +21,11 @@
 	<div class="left_div">
 		<div class="h">评论</div>
 		<ul id="remarks">
-		<?php if($remarks){foreach($remarks as $v){?>
-	<li><?php echo $system->succ->head_html($v['uid']),date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
-		<?php }}else{?>
-		还没有评论
-		<?php } ?>
+<?php if($remarks){foreach($remarks as $v){?>
+			<li><?php echo $system->succ->head_html($v['uid']),date('Y-m-d H:i:s',$v['time']);?>：<?php echo $v['content'];?></li>
+<?php }}else{?>
+			还没有评论
+<?php } ?>
 		</ul>
 	</div>
 	<div class="left_div">
