@@ -42,7 +42,7 @@
 	(function(){
 		flash_a=function(){
 			$('a').set('onclick',function(){
-				if(this.href.indexOf('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>')===0){
+				if(this.host==="<?php echo $_SERVER['HTTP_HOST'];?>"&&this.pathname.indexOf('<?php echo URLROOT; ?>')===0){
 					//window.location.hash=this.href.replace('http://<?php echo $_SERVER['HTTP_HOST'].URLROOT; ?>','');
 					//this.innerHTML='<h1>正在载入</h1>';
 					get_page(this.href);
@@ -51,6 +51,16 @@
 				}
 			});
 		};
+		// document.addEventListener("click",function(ev){
+		// 	var dom=ev.target;
+		// 	if(dom.tagName.toLowerCase()=="a"){
+		// 		console.log(111);
+		// 		get_page(this.href);
+		// 		document.title='正在加载——星星站点博客';
+		// 		ev.stopPropagation();
+		// 		return false;
+		// 	}
+		// },false);
 		var run_div_script=function(){
 			var script=$('#main').innerHTML.match(/<script>(.|\n|\r)+<\/script>/gi);
 			for(var i in script){
