@@ -116,6 +116,7 @@ class essay_server{
 		return $res?$res[0]:null;
 	}
 	public function marked_essay($body){
+		$body=str_replace('{$img_url}', $this->system->ini_get('imgs_url'), $body);
 		return \marked_tool::marked_all($body);
 	}
 	/**
