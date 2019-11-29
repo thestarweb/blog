@@ -5,3 +5,5 @@ cfg.ini
 *.temp.*
 error.log
 plugin/*
+cache/*
+php_errors.log
