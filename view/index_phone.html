@@ -6,7 +6,7 @@
 		<div class="block essay_li mk">
 			<h1 class="title"><?php echo $v['title'];?></h1>
 			<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
-			<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
+			<div class="content"><?php echo $v['content_marked'];?></div>
 			<div class="after"></div>
 		</div>
 		</a>
@@ -14,9 +14,4 @@
 		暂无文章
 	<?php } ?>
 	</div>
-	<script>
-		var list=$('.content');
-		for(var i=0;i<list.length;i++){
-			myScript.marked_dom(list[i],{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
-		}
-	</script>
+<?php require $system->get_view('script/index.script',false);?>

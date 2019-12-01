@@ -20,7 +20,7 @@ class essay_server{
 	*/
 	public function get_list_with_content($limit){
 		$limit+=0;
-		return $this->system->db()->exec('SELECT `id`,`title`,`time`,`content`,`display` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$limit);
+		return $this->system->db()->exec('SELECT `id`,`title`,`time`,`update_time`,`content`,`display` FROM `'.self::table.'` ORDER BY `time` DESC limit '.$limit);
 	}
 	/**
 		获取文章列表
@@ -40,7 +40,7 @@ class essay_server{
 	*/
 	public function get_push($type,$limit=10){
 		$type+=0;$limit+=0;
-		return $this->system->db()->exec('SELECT `e`.`id`,`e`.`title`,`e`.`time`,`e`.`content`,`e`.`display` FROM `'.self::table.'` as `e` JOIN `'.self::push_table.'` ON `e`.`id`=`'.self::push_table.'`.`essay` WHERE `'.self::push_table.'`.`type`='.$type.' LIMIT '.$limit);
+		return $this->system->db()->exec('SELECT `e`.`id`,`e`.`title`,`e`.`time`,`e`.`update_time`,`e`.`content`,`e`.`display` FROM `'.self::table.'` as `e` JOIN `'.self::push_table.'` ON `e`.`id`=`'.self::push_table.'`.`essay` WHERE `'.self::push_table.'`.`type`='.$type.' LIMIT '.$limit);
 	}
 	/**
 		计算文章页数

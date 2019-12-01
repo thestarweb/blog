@@ -16,7 +16,7 @@
 			</div>
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 				<div class="send_time"><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
-				<div class="content"><?php echo $v['display']?$v['content']:'此文章已被管理员隐藏';?></div>
+				<div class="content"><?php echo $v['display']?$v['content_marked']:'此文章已被管理员隐藏';?></div>
 			</a>
 			<div class="after"></div>
 		</div>
@@ -37,7 +37,7 @@
 			</div>
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 				<div class="send_time"><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
-				<div class="content"><?php echo $v['display']?\marked_tool::marked_all($v['content']):'此文章已被管理员隐藏';?></div>
+				<div class="content"><?php echo $v['content_marked'];?></div>
 			</a>
 			<div class="after"></div>
 		</div>
@@ -55,9 +55,4 @@
 	</ul></div>
 </div>
 <?php require $system->get_view('others');?>
-<script>
-	var list=$('.content');
-	// for(var i=0;i<list.length;i++){
-	// 	myScript.marked_dom(list[i],{img_url:'<?php echo $system->ini_get('imgs_url');?>'});
-	// }
-</script>
+<?php require $system->get_view('script/index.script');?>
