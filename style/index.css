@@ -32,4 +32,5 @@
 	background: linear-gradient(rgba(7,26,55,0),rgba(7,26,55,1));
 	position: absolute;
 	bottom: 0px;
+	pointer-events: none;
 }
