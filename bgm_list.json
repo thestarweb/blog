@@ -1,4 +1,4 @@
 [
-	{name:'天宫之城',src:'/bgm1.mp3'},
-	{name:'纯音乐童年',src:'/bgm2.mp3?1'}
+	{"name":"天宫之城","src":"/bgm1.mp3"},
+	{"name":"纯音乐童年","src":"/bgm2.mp3?1"}
 ]
