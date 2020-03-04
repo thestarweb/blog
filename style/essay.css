@@ -34,7 +34,7 @@
 	overflow: hidden;
 }
 #content p:before{
-	content:'　　';
+	content:'\3000\3000';
 }
 #remark_input{
 	margin: 2px 5px;
