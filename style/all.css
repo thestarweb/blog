@@ -5,7 +5,8 @@
 	padding: 0px;
 	position:relative;
 	list-style-type:none;/*清除li带来的点*/
-	color: #b0bdd0;
+	/*color: #b0bdd0;*/
+	color: #b0bdc0;
 }
 body{
 	background:#88f;
@@ -94,6 +95,12 @@ body{
 .fanye{
 	text-align:center;
 	line-height: 50px;
+}
+/*.content *,#content *{
+	color: #a0adb0;
+}*/
+h1,h2,h3,h4,h5,#title{
+	color: #d0ddf0;
 }
 footer #f{
 	text-align:center;

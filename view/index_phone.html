@@ -3,10 +3,10 @@
 	<div>
 	<?php if($essay_list) foreach($essay_list as $v){ ?>
 		<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
-		<div class="block essay_li mk">
+		<div class="block essay_li">
 			<h1 class="title"><?php echo $v['title'];?></h1>
 			<div><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
-			<div class="content"><?php echo $v['content_marked'];?></div>
+			<div class="content mk"><?php echo $v['content_marked'];?></div>
 			<div class="after"></div>
 		</div>
 		</a>

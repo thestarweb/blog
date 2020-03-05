@@ -26,7 +26,7 @@
 	<div class="left_div">
 		<div class="h">文章列表<span><a href="<?php echo URLROOT;?>essay/list/1">更多</a></span></div>
 	<?php if($essay_list) foreach($essay_list as $v){ ?>
-		<div class="essay_li mk">
+		<div class="essay_li">
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 				<h1 class="title"><?php echo $v['title'];?></h1>
 			</a>
@@ -37,7 +37,7 @@
 			</div>
 			<a href="<?php echo URLROOT,'essay/id/',$v['id'];?>" style="display:block;">
 				<div class="send_time"><?php echo date('Y-m-d H:i:s',$v['time']);?></div>
-				<div class="content"><?php echo $v['content_marked'];?></div>
+				<div class="content mk"><?php echo $v['content_marked'];?></div>
 			</a>
 			<div class="after"></div>
 		</div>

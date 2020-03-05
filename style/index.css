@@ -17,9 +17,6 @@
 	margin:4px;
 	background:rgba(255,255,255,0.5);
 }
-.content p:before{
-	content:'\3000\3000';
-}
 .essay_li{
 	max-height: 450px;
 	overflow: hidden;

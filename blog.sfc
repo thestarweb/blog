@@ -5,7 +5,7 @@ if(!defined('system::VISION')||system::VISION<15){
 	die('核心框架system版本过低');
 }
 //版本及版权信息
-			define('VERSION','1.4.0.0269');
+			define('VERSION','1.4.0.0280');
 			define('MAKE_TIME','2020-03-05');
 			define('VERSION_INFO',VERSION.' &nbsp;'.MAKE_TIME);
 			define('COPY','星星站点博客&copy;2013-2020 星星站点 保留所有权利');
