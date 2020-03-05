@@ -66,7 +66,7 @@ p{
 	<tr>
 		<td colspan="2">
 			<p>by星星站点</p>
-			<p>2014.09.07</p>
+			<p>admin页面框架最后修改日期2020.03.05</p>
 		</td>
 	</tr>
 </table>
@@ -74,8 +74,6 @@ p{
 <script src="<?php echo $system->ini_get('my_script_path');?>"></script>
 <?php $system->succ->show_script();?>
 <script type="text/javascript">
-var iframe=$.set('iframe',$('#web'));
-iframe.name='opiframe';
 suc_u_load(function(suc_u_info){
 var menu=<?php echo json_encode($menus);?>;
 //var opening=[];
@@ -99,8 +97,9 @@ function set_menu(arr,dom){
 				t.innerHTML=this.innerHTML;
 				t.className='opening';
 				t.title=this.innerHTML;
-				var iframe=$.set('iframe',$('#web'));
-				<?php if(isset($postkey)){?>
+<?php if(isset($postkey)){?>
+				var iframe=$.set('div',$('#web'));
+				iframe.innerHTML="<iframe name='opiframe'></iframe>";
 				var f=$('#gform');
 				//alert(f.target);
 				$('#postkey').value='<?php echo $postkey;?>';
@@ -108,14 +107,16 @@ function set_menu(arr,dom){
 				f.target='opiframe';
 				f.submit();
 				iframe.name='';
-				<?php }else{?>
+<?php }else{?>
+				var iframe=$.set('iframe',$('#web'));
 				iframe.src=this.info.src;//+'&key='+suc_u_info.u.key;//打开页面
-				<?php } ?>
+<?php } ?>
 				t.iframe=iframe;
 				t.onclick=function(){
 					go_to(this);
 				}
 				t.oncontextmenu=function(ev){//右键标签出菜单
+					if(cd) cd.off();
 					if(!ev.x) ev.x=ev.clientX;
 					if(!ev.y) ev.y=ev.clientY;
 					var m=this;
@@ -126,7 +127,7 @@ function set_menu(arr,dom){
 					cd.className='menu_box';
 					cd.off=function(){
 						$.remove(cd);
-						vd=null;
+						cd=null;
 					}
 					var off=$.set('div',cd);
 					off.innerHTML='关闭标签';
