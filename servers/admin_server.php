@@ -34,7 +34,7 @@ class admin_server{
 		}
 		foreach($res as &$v){
 			if(!$v['src']){
-				$uroot=($_SERVER['SERVER_PROTOCOL']=='HTTP/1.1'?'http://':'https://').$_SERVER['SERVER_NAME'].URLROOT.'myadmin/view?id=';
+				$uroot='//'.$_SERVER['SERVER_NAME'].URLROOT.'myadmin/view?id=';
 				$v['src']=$uroot.$v['id'];
 			}
 		}
